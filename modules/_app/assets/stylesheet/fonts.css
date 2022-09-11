@@ -1,0 +1,58 @@
+@font-face {
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 400;
+    src:
+            url("../fonts/Gilroy/woff/Gilroy-Regular.woff") format("woff"),
+            url("../fonts/Gilroy/ttf/Gilroy-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 500;
+    src:
+            url("../fonts/Gilroy/woff/Gilroy-Medium.woff") format("woff"),
+            url("../fonts/Gilroy/ttf/Gilroy-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 600;
+    src:
+            url("../fonts/Gilroy/woff/Gilroy-SemiBold.woff") format("woff"),
+            url("../fonts/Gilroy/ttf/Gilroy-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 700;
+    src:
+            url("../fonts/Gilroy/woff/Gilroy-Bold.woff") format("woff"),
+            url("../fonts/Gilroy/ttf/Gilroy-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 800;
+    src:
+            url("../fonts/Gilroy/woff/Gilroy-ExtraBold.woff") format("woff"),
+            url("../fonts/Gilroy/ttf/Gilroy-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 900;
+    src:
+            url("../fonts/Gilroy/woff/Gilroy-Heavy.woff") format("woff"),
+            url("../fonts/Gilroy/ttf/Gilroy-Heavy.ttf") format("truetype");
+}
+
+
+html, body {
+    font-size: 12px;
+}
