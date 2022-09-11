@@ -60,7 +60,7 @@ const ShaparakPayment: FunctionComponent<{ ticketInfo: TicketProps, isMobile: bo
                         />
                     </LabeledCustomTextField>
                     <Grid container sx={{ margin: "4rem 0 ", alignItems: "center" }}>
-                        <Grid item md={6} xs={10}>
+                        <Grid item md={8} xs={10}>
                             <LabeledCustomTextField id="Quantity" label="Quantity" isNumber>
                                 <CustomTextField
                                     variant="outlined"
@@ -82,7 +82,7 @@ const ShaparakPayment: FunctionComponent<{ ticketInfo: TicketProps, isMobile: bo
                         }
                     </Grid>
                     <Grid container sx={{ alignItems: "center" }}>
-                        <Grid md={8} xs={10}>
+                        <Grid item md={8} xs={10}>
                             <LabeledCustomTextField id="TotalPrice" label="Total Price:" isNumber>
                                 <span style={{ fontSize: "2rem", fontWeight: 700 }}>{props.ticketInfo.Price} IRR</span>
                             </LabeledCustomTextField>

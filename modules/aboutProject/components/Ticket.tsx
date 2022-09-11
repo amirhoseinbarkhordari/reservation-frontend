@@ -1,7 +1,8 @@
-import { Container, styled, Typography } from "@mui/material";
 import type { FunctionComponent } from "react";
-import TicketCafeIcon from "../../shared/components/icons/TicketCafeIcon";
 import type { TicketProps } from "../../shared/types/TicketProps";
+import { Container, Grid, styled, Typography } from "@mui/material";
+import TicketCafeIcon from "../../shared/components/icons/TicketCafeIcon";
+import IconsArray from "./IconsArray";
 
 const TicketComponent = styled(Container)(({ theme }) => ({
     display: "flex",
@@ -33,20 +34,32 @@ const TicketInfo = styled("div")(({ theme }) => ({
     },
 }));
 
+const Ticket: FunctionComponent<{ TicketProps: TicketProps }> = (props) => {
+    const { TicketColors, TypeTicket, DescriptionTicket, Price, iconList } = props.TicketProps;
+    const iconsArray = IconsArray;
 
-const TicketTypes: FunctionComponent<{ TicketProps: TicketProps }> = (props) => {
-    const { TicketColors, TypeTicket, DescriptionTicket, Price } = props.TicketProps;
     return (
         <TicketComponent maxWidth="md">
             <TicketCafeIcon fontSize={10} color={TicketColors} />
-            <TicketInfo style={{}}>
+            <TicketInfo >
                 <Typography variant="h3" sx={{ fontWeight: 700 }} gutterBottom>{TypeTicket}</Typography>
                 <CustomTypography variant="h6" >{DescriptionTicket}</CustomTypography>
             </TicketInfo>
             <div style={{ width: "50%" }}>
                 <Typography variant="h5">Price:<span style={{ fontWeight: 800 }}> {Price} IRR</span></Typography>
+                <Grid container sx={{ marginTop: "0.8rem" }}>
+                    {
+                        !!iconsArray && iconsArray.map((item) => {
+                            return (
+                                <Grid item key={item.slug} md={5}>
+                                    <item.icon fontSize={2} color={(iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"} />
+                                </Grid>
+                            )
+                        })
+                    }
+                </Grid>
             </div>
-        </TicketComponent>
+        </TicketComponent >
     )
 }
-export default TicketTypes;
+export default Ticket;

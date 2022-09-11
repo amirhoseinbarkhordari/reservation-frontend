@@ -4,6 +4,7 @@ export type TicketProps = {
     DescriptionTicket: string;
     TicketColors: TicketColor;
     Price: number;
+    iconList: string[];
 };
 
 export type TicketColor = {

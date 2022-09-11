@@ -2,7 +2,7 @@ import { Button, Container, Grid, styled, Typography, useMediaQuery, useTheme } 
 import { Theme } from "@mui/material";
 import { FunctionComponent, useState } from "react";
 import TicketCafeIcon from "../../shared/components/icons/TicketCafeIcon";
-import type { TicketColor, TicketProps } from "../../shared/types/TicketProps";
+import type { TicketProps } from "../../shared/types/TicketProps";
 import PaymentMethod from "./PaymentMethod";
 import ShaparakPayment from "./ShaparakPayment";
 import XarbPayment from "./XarbPayment";
@@ -33,10 +33,10 @@ const TicketContainer = styled("div")(({ theme }) => ({
     justifyContent: "space-between"
 }));
 
-const PurchaseTicket: FunctionComponent<{ Tickets: TicketProps[], isMobile: boolean }> = (props) => {
+const PurchaseTicket: FunctionComponent<{ ticketTypes: TicketProps[], isMobile: boolean }> = (props) => {
 
-    const Tickets = props.Tickets;
-    const [ticketInfo, setTicketInfo] = useState<TicketProps>(Tickets[0]);
+    const ticketTypes = props.ticketTypes;
+    const [ticketInfo, setTicketInfo] = useState<TicketProps>(ticketTypes[0]);
     const [paymentMethod, setPaymentMethod] = useState<string>("Xarb");
 
     const disableTicketColor = {
@@ -50,7 +50,7 @@ const PurchaseTicket: FunctionComponent<{ Tickets: TicketProps[], isMobile: bool
             <CustomTypography variant="h3">Purchase the Ticket</CustomTypography>
             <Typography variant="h5" sx={{ fontSize: "1.8rem" }}>Tickets</Typography>
             <TicketContainer>
-                {!!Tickets && Tickets.map((item) => {
+                {!!ticketTypes && ticketTypes.map((item) => {
                     return (
                         <div key={item.id} style={{ cursor: 'pointer' }} onClick={() => setTicketInfo(item)}>
                             <TicketCafeIcon fontSize={props.isMobile ? 7 : 20} color={(ticketInfo.id == item.id) ? item.TicketColors : disableTicketColor} />
