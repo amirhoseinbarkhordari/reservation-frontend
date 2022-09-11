@@ -1,31 +1,50 @@
-import { Container, styled, Typography, useMediaQuery } from "@mui/material";
-import type { Theme } from "@mui/material";
+import { Container, styled, Typography } from "@mui/material";
 import type { FunctionComponent } from "react";
 import TicketCafeIcon from "../../shared/components/icons/TicketCafeIcon";
 import type { TicketProps } from "../../shared/types/TicketProps";
 
-
-const TicketComponent = styled(Container)(() => ({
+const TicketComponent = styled(Container)(({ theme }) => ({
     display: "flex",
-    flexDirection: "row",
-    width: "100%",
-    alignItems: "flex-start",
+    [theme.breakpoints.down("sm")]: {
+        flexDirection: "column",
+        textAlign: "center",
+        alignItems: "center",
+    },
+    [theme.breakpoints.up("sm")]: {
+        alignItems: "flex-start",
+        flexDirection: "row",
+    },
     justifyContent: "center",
     margin: "3rem 0",
     padding: 0
 }));
 
-const TicketTypes: FunctionComponent<{ TicketProps: TicketProps, isMobile: boolean }> = (props) => {
+const CustomTypography = styled(Typography)(({ theme }) => ({
+    [theme.breakpoints.up("sm")]: {
+        textAlign: "justify",
+    },
+}));
+
+const TicketInfo = styled("div")(({ theme }) => ({
+    width: "100%",
+    margin: "0 5rem",
+    [theme.breakpoints.down("sm")]: {
+        margin: "3rem 5rem"
+    },
+}));
+
+
+const TicketTypes: FunctionComponent<{ TicketProps: TicketProps }> = (props) => {
     const { TicketColors, TypeTicket, DescriptionTicket, Price } = props.TicketProps;
     return (
         <TicketComponent maxWidth="md">
-            <TicketCafeIcon fontSize={props.isMobile ? 6 : 10} color={TicketColors} />
-            <div style={{ margin: "0 3rem", width: "100%" }}>
+            <TicketCafeIcon fontSize={10} color={TicketColors} />
+            <TicketInfo style={{}}>
                 <Typography variant="h3" sx={{ fontWeight: 700 }} gutterBottom>{TypeTicket}</Typography>
-                <Typography variant="h6" textAlign="justify" >{DescriptionTicket}</Typography>
-            </div>
-            <div style={{ width: "20%" }}>
-                <Typography variant="h5" sx={{ fontWeight: 400 }}>Price:<span style={{ fontWeight: 500 }}> {Price}$</span></Typography>
+                <CustomTypography variant="h6" >{DescriptionTicket}</CustomTypography>
+            </TicketInfo>
+            <div style={{ width: "50%" }}>
+                <Typography variant="h5">Price:<span style={{ fontWeight: 800 }}> {Price} IRR</span></Typography>
             </div>
         </TicketComponent>
     )

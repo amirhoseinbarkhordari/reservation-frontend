@@ -50,7 +50,7 @@ export default createTheme({
             fontWeight: 500,
             fontSize: "1.2rem",
             color: "#767676",
-        }
+        },
     },
     palette: {
         primary: {
@@ -59,6 +59,7 @@ export default createTheme({
         },
         secondary: {
             main: "#F6F6F6",
+            dark: "#F7F7F7"
         },
         error: {
             main: "#FF4242",
@@ -87,6 +88,9 @@ export default createTheme({
         },
         login: {
             main: "#4CAF50",
+        },
+        text: {
+            primary: "#1D1D1D",
         },
     },
     shape: {

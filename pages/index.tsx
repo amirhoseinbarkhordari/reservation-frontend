@@ -20,9 +20,9 @@ const Home: NextPage = () => {
   return (
     <>
       <Header />
-      <Container sx={{ marginTop: "6rem" }}>
+      <Container>
         <Divider sx={{ width: "100%" }} />
-        <AboutProject Tickets={Tickets} isMobile={isMobile} />
+        <AboutProject Tickets={Tickets} />
         <PurchaseTicket Tickets={Tickets} isMobile={isMobile} />
       </Container>
 
