@@ -69,22 +69,16 @@ export default createTheme({
             paper: "#fff",
         },
         golden: {
-            light: "#CBB065",
             main: "#AB9454",
             dark: "#877542",
-            contrastText: "#A9914E"
         },
         silver: {
-            light: "#C0C0C0",
             main: "#A3A3A3",
             dark: "#858585",
-            contrastText: "#A4A4A4"
         },
         bronze: {
-            light: "#C7976A",
             main: "#AE845C",
             dark: "#846242",
-            contrastText: "#9F7956"
         },
         login: {
             main: "#4CAF50",

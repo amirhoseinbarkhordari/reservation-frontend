@@ -1,4 +1,5 @@
-import { Button, Container, Grid, styled, Typography } from "@mui/material";
+import { Button, Grid, styled, Typography } from "@mui/material";
+import type { PaletteColor } from "@mui/material";
 import { FunctionComponent } from "react";
 import type { TicketProps } from "../../shared/types/TicketProps";
 
@@ -13,11 +14,11 @@ const CustomTypography = styled(Typography)(({ theme }) => ({
 }));
 
 const XarbPayment: FunctionComponent<{ ticketInfo: TicketProps }> = (props) => {
-    const CustomButton = styled(Button)(() => ({
-        backgroundColor: props.ticketInfo.TicketColors.main,
+    const CustomButton = styled(Button)(({ theme }) => ({
+        backgroundColor: (theme.palette[props.ticketInfo.color] as PaletteColor).main,
         margin: "6rem 0",
         "&:hover": {
-            background: props.ticketInfo.TicketColors.dark
+            background: (theme.palette[props.ticketInfo.color] as PaletteColor).dark,
         }
     }));
 

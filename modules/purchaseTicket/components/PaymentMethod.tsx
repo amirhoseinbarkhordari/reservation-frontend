@@ -1,4 +1,5 @@
-import { Container, Divider, Grid, styled } from "@mui/material";
+import { Divider, styled, useTheme } from "@mui/material";
+import type { PaletteColor } from "@mui/material";
 import type { Dispatch, FunctionComponent, SetStateAction } from "react";
 import { useState } from "react";
 import Image from "next/image";
@@ -16,13 +17,14 @@ const ImageDisplay = styled("div")(() => ({
 }));
 
 const PaymentMethod: FunctionComponent<{ paymentMethod: string, ticketInfo: TicketProps, setPaymentMethod: Dispatch<SetStateAction<string>> }> = (props) => {
+    const theme = useTheme();
     return (
         <div style={{ marginTop: "3.57rem", display: "flex" }}>
-            <ImageDisplay style={(props.paymentMethod == "Xarb") ? { border: `4px solid ${props.ticketInfo.TicketColors.light}` } : {}}>
+            <ImageDisplay style={(props.paymentMethod == "Xarb") ? { border: `4px solid ${(theme.palette[props.ticketInfo.color] as PaletteColor).main}` } : {}}>
                 <Image src={Xarb} onClick={() => props.setPaymentMethod("Xarb")} layout="fill" />
             </ImageDisplay>
             <Divider sx={{ backgroundColor: "rgba(0, 0, 0, 0.28)", margin: "0 2rem" }} orientation="vertical" variant="middle" flexItem />
-            <ImageDisplay style={(props.paymentMethod == "Shaparak") ? { border: `4px solid ${props.ticketInfo.TicketColors.light}` } : {}}>
+            <ImageDisplay style={(props.paymentMethod == "Shaparak") ? { border: `4px solid ${(theme.palette[props.ticketInfo.color] as PaletteColor).main}` } : {}}>
                 <Image src={Shaparak} onClick={() => props.setPaymentMethod("Shaparak")} layout="fill" />
             </ImageDisplay>
         </div>
