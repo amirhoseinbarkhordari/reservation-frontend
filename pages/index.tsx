@@ -13,7 +13,7 @@ const Home: NextPage = () => {
       <Header />
       <Container>
         <Divider sx={{ width: "100%" }} />
-        <AboutProject ticketTypes={TicketTypes} />
+        <AboutProject ticketTypes={TicketTypes} isMobile={isMobile} />
         <PurchaseTicket ticketTypes={TicketTypes} isMobile={isMobile} />
       </Container>
 
