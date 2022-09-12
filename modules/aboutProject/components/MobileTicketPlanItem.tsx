@@ -10,7 +10,7 @@ const FlexedDiv = styled("div")({
     alignItems: "center"
 });
 
-const MobileTicketPlanItem: FunctionComponent<{ ticket: TicketProps }> = ({ ticket }) => {
+const MobileTicketPlanItem: FunctionComponent<{ ticket: TicketProps }> = ({ticket}) => {
     return (<FlexedDiv>
         <BronzTicket height={12} fontSize={15}/>
         <Typography marginTop={3} variant="h3">
@@ -23,16 +23,17 @@ const MobileTicketPlanItem: FunctionComponent<{ ticket: TicketProps }> = ({ tick
             {ticket.descriptionTicket}
         </Typography>
         <div>
-            <Grid container sx={{ marginTop: "0.8rem" }}>
-                {
-                    IconsArray.map((item) => {
-                        return (
-                            <Grid item key={item.slug} xs={2}>
-                                <item.icon fontSize={2} color={(ticket.iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"} />
-                            </Grid>
-                        )
-                    })
-                }
+            <Grid container rowSpacing={0} columnSpacing={2} sx={{marginTop: "0.8rem"}}>
+                {IconsArray.slice(0, 5).map((item) => (<Grid item key={item.slug} xs>
+                    <item.icon fontSize={2} color={(ticket.iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"}/>
+                </Grid>))}
+            </Grid>
+            <Grid container rowSpacing={0} columnSpacing={2}>
+                {IconsArray.slice(5, 10).map((item) => (<Grid item key={item.slug} xs>
+                        <item.icon fontSize={2}
+                                   color={(ticket.iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"}/>
+                    </Grid>
+                ))}
             </Grid>
         </div>
     </FlexedDiv>);
