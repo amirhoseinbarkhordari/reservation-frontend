@@ -5,14 +5,14 @@ declare module "@mui/material/styles/createPalette" {
         golden: Palette["primary"];
         silver: Palette["primary"];
         bronze: Palette["primary"];
-        login: Palette["primary"];
+        iconList: Palette["primary"];
     }
 
     interface PaletteOptions {
         golden: PaletteOptions["primary"];
         silver: PaletteOptions["primary"];
         bronze: PaletteOptions["primary"];
-        login: PaletteOptions["primary"];
+        iconList: PaletteOptions["primary"];
     }
 }
 
@@ -80,12 +80,13 @@ export default createTheme({
             main: "#AE845C",
             dark: "#846242",
         },
-        login: {
-            main: "#4CAF50",
-        },
         text: {
             primary: "#1D1D1D",
         },
+        iconList: {
+            light: "#C5C5C5",
+            main: "#1D1D1D",
+        }
     },
     shape: {
         borderRadius: 15,

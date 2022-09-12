@@ -1,9 +1,9 @@
-import type { IconProps } from "../../types/IconProps";
+import type { IconProps } from "../../../types/IconProps";
 import type { ReactElement } from "react";
 import React from "react";
 import { SvgIcon } from "@mui/material";
 
-const BronzTicket: React.FunctionComponent<IconProps> = (props): ReactElement => {
+const BronzeTicket: React.FunctionComponent<IconProps> = (props): ReactElement => {
     return (
         <SvgIcon
             htmlColor="transparent"
@@ -86,4 +86,4 @@ const BronzTicket: React.FunctionComponent<IconProps> = (props): ReactElement =>
     );
 };
 
-export default BronzTicket;
+export default BronzeTicket;

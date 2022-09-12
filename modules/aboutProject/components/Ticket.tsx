@@ -1,7 +1,6 @@
 import type { FunctionComponent } from "react";
 import type { TicketProps } from "../../shared/types/TicketProps";
-import { Container, Grid, styled, Typography } from "@mui/material";
-import BronzTicket from "../../shared/components/icons/BronzTicket";
+import { Container, Grid, styled, Typography, useTheme } from "@mui/material";
 import IconsArray from "./IconsArray";
 
 const TicketComponent = styled(Container)(({ theme }) => ({
@@ -36,11 +35,13 @@ const TicketInfo = styled("div")(({ theme }) => ({
 
 const Ticket: FunctionComponent<{ TicketProps: TicketProps }> = (props) => {
     const { typeTicket, descriptionTicket, price, iconList } = props.TicketProps;
+    const theme = useTheme();
+    const Icon = props.TicketProps.svgIcon;
     const iconsArray = IconsArray;
 
     return (
         <TicketComponent maxWidth="md">
-            <BronzTicket fontSize={10} />
+            <Icon fontSize={10} />
             <TicketInfo >
                 <Typography variant="h3" sx={{ fontWeight: 700 }} gutterBottom>{typeTicket}</Typography>
                 <CustomTypography variant="h6" >{descriptionTicket}</CustomTypography>
@@ -49,10 +50,18 @@ const Ticket: FunctionComponent<{ TicketProps: TicketProps }> = (props) => {
                 <Typography variant="h5">Price:<span style={{ fontWeight: 800 }}> {price} IRR</span></Typography>
                 <Grid container sx={{ marginTop: "0.8rem" }}>
                     {
-                        !!iconsArray && iconsArray.map((item) => {
+                        iconsArray.map((item) => {
                             return (
-                                <Grid item key={item.slug} md={5}>
-                                    <item.icon fontSize={2} color={(iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"} />
+                                <Grid item key={item.slug} md={3}>
+                                    <item.icon
+                                        fontSize={2}
+                                        color={
+                                            iconList.includes(item.slug) ?
+                                                theme.palette.iconList.main
+                                                :
+                                                theme.palette.iconList.light
+                                        }
+                                    />
                                 </Grid>
                             )
                         })
