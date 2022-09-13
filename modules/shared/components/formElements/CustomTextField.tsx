@@ -1,4 +1,4 @@
-import { InputAdornment, TextField, TextFieldProps, Typography } from "@mui/material";
+import { TextField, TextFieldProps } from "@mui/material";
 import { ChangeEvent, ChangeEventHandler, FunctionComponent, ReactElement } from "react";
 import { useState } from "react";
 
@@ -16,6 +16,7 @@ const CustomTextField: FunctionComponent<CustomTextFieldProps> = ({ value = "", 
     return (
         <TextField
             {...props}
+            sx={!props.disabled ? { borderRadius: 15, backgroundColor: "#ffffff" } : { borderRadius: 15, backgroundColor: "#F0F0F0" }}
             value={input}
             onChange={changeHandler}
         />

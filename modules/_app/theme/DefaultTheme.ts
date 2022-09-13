@@ -97,8 +97,8 @@ export default createTheme({
                 root: {
                     fontFamily: "Gilroy",
                     borderRadius: "1rem",
-                    fontSize: "2rem",
-                    height: "5rem",
+                    fontSize: "1.5rem",
+                    height: "4rem",
                     color: "white",
                     width: "100%",
                     fontWeight: 700,
@@ -117,10 +117,6 @@ export default createTheme({
         },
         MuiOutlinedInput: {
             styleOverrides: {
-                root: {
-                    borderRadius: 15,
-                    backgroundColor: "#ffffff"
-                },
                 notchedOutline: {
                     border: "2px solid #DDDDDD",
                 },
