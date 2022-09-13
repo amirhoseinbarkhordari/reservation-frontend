@@ -1,7 +1,6 @@
 import type { FunctionComponent } from "react";
 import type { TicketProps } from "../../shared/types/TicketProps";
 import { Container, Grid, styled, Typography } from "@mui/material";
-import BronzeTicket from "../../shared/components/icons/ticketIcons/BronzeTicket";
 import IconsArray from "./IconsArray";
 
 const TicketComponent = styled(Container)(({ theme }) => ({
@@ -46,16 +45,16 @@ const Ticket: FunctionComponent<{ ticket: TicketProps }> = (props) => {
             </TicketInfo>
             <div style={{ width: "50%" }}>
                 <Typography variant="h5">Price:<span style={{ fontWeight: 800 }}> {price} IRR</span></Typography>
-                <Grid container rowSpacing={0} columnSpacing={2} sx={{marginTop: "0.8rem"}}>
+                <Grid container rowSpacing={0} columnSpacing={2} sx={{ marginTop: "0.8rem" }}>
                     {IconsArray.slice(0, 5).map((item) => (<Grid item key={item.slug} xs>
-                        <item.icon fontSize={2} color={(iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"}/>
+                        <item.icon fontSize={2} color={(iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"} />
                     </Grid>))}
                 </Grid>
                 <Grid container rowSpacing={0} columnSpacing={2}>
                     {IconsArray.slice(5, 10).map((item) => (<Grid item key={item.slug} xs>
-                            <item.icon fontSize={2}
-                                       color={(iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"}/>
-                        </Grid>
+                        <item.icon fontSize={2}
+                            color={(iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"} />
+                    </Grid>
                     ))}
                 </Grid>
             </div>

@@ -1,47 +1,23 @@
-import styled from "@emotion/styled";
-import { Button, Grid, Typography, useTheme } from "@mui/material";
+import { Button, Grid, Typography, styled, useTheme } from "@mui/material";
 import type { PaletteColor } from "@mui/material";
 import type { ChangeEvent, Dispatch, FunctionComponent, SetStateAction } from "react";
 import type { PaymentProps } from "../../shared/types/PaymentProps";
-import { PaymentMethodList } from "./PaymentMethodList";
 import LabeledCustomTextField from "../../shared/components/formElements/LabelCustomTextField";
 import CustomTextField from "../../shared/components/formElements/CustomTextField";
 import type { TicketProps } from "../../shared/types/TicketProps";
-import Image from "next/image";
+import payment from "../api/payment";
+import formElementsData from "../../shared/components/formElements/formElementsData";
+import type { FormArgumentType } from "../../shared/types/formArgumentType";
+import PaymentMethods from "./PaymentMethods";
 
-const ImageDisplay = styled("div")(() => ({
-    borderRadius: 24,
-    cursor: 'pointer',
-    position: "relative",
-    overflow: "hidden",
-    width: 100,
-    height: 100,
-    border: "4px solid transparent",
-}));
-
-const DivWithSeparator = styled(Grid)({
-    "& > div.container": {
-        position: "relative",
-        margin: "0 10px",
-        "&:after": {
-            content: "''",
-            display: "block",
-            position: "absolute",
-            margin: "-18px 0px",
-            right: "5px",
-            top: "50%",
-            width: "1px",
-            height: "36px",
-            backgroundColor: "rgba(0, 0, 0, 0.28)"
-        }
-    },
-    "&:last-child > div.container:after": {
-        display: "none"
-    }
-});
-
-const FormPayment: FunctionComponent<{ isMobile: boolean, paymentMethod: PaymentProps, ticketInfo: TicketProps, setPaymentMethod: Dispatch<SetStateAction<PaymentProps>> }> = (props) => {
+const FormPayment: FunctionComponent<{
+    isMobile: boolean,
+    paymentMethod: PaymentProps,
+    ticketInfo: TicketProps,
+    setPaymentMethod: Dispatch<SetStateAction<PaymentProps>>
+}> = (props) => {
     const theme = useTheme();
+
     const paymentMethod = props.paymentMethod;
     const ticketInfo = props.ticketInfo;
 
@@ -55,35 +31,19 @@ const FormPayment: FunctionComponent<{ isMobile: boolean, paymentMethod: Payment
 
     const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(event.target);
+        let formData = formElementsData(event.target) as FormArgumentType;
+        if (!formData.quantity)
+            formData.quantity = 0;
+        formData.paymentMethod = paymentMethod.name;
+        formData.productId = 15;
+        payment(formData).then(res => window.location.href = res.data.paymentLink)
     }
 
     return (
         <form onSubmit={handleSubmit}>
             <Grid container>
                 <Grid item md={8}>
-                    <Grid container>
-                        {PaymentMethodList.map((item) => {
-                            return (
-                                <DivWithSeparator item md={6} xs={6} key={item.name}>
-                                    <div className="container">
-                                        <ImageDisplay style={
-                                            (paymentMethod.name == item.name) ?
-                                                { borderColor: (theme.palette[ticketInfo.color] as PaletteColor).main }
-                                                :
-                                                {}
-                                        }>
-                                            <Image
-                                                src={item.image}
-                                                onClick={() => props.setPaymentMethod(item)}
-                                                layout="fill" />
-                                        </ImageDisplay>
-                                    </div>
-                                </DivWithSeparator>
-                            )
-                        })
-                        }
-                    </Grid>
+                    <PaymentMethods setPaymentMethod={props.setPaymentMethod} paymentMethod={paymentMethod} ticketInfo={ticketInfo} />
                 </Grid >
                 {!props.isMobile ?
                     <Grid item md={3}>
@@ -91,7 +51,7 @@ const FormPayment: FunctionComponent<{ isMobile: boolean, paymentMethod: Payment
                             <CustomTextField
                                 variant="outlined"
                                 type="number"
-                                name="Quantity"
+                                name="quantity"
                                 id="Quantity"
                                 disabled={paymentMethod.disable}
                                 // helperText={errors.description}
@@ -109,7 +69,7 @@ const FormPayment: FunctionComponent<{ isMobile: boolean, paymentMethod: Payment
                     <LabeledCustomTextField id="FullName" label="Full Name">
                         <CustomTextField
                             variant="outlined"
-                            name="FullName"
+                            name="fullName"
                             id="FullName"
                             placeholder="e.g. `Amir Ramzali ...`"
                             // helperText={errors.description}
@@ -120,7 +80,7 @@ const FormPayment: FunctionComponent<{ isMobile: boolean, paymentMethod: Payment
                     <LabeledCustomTextField id="Email" label="Email">
                         <CustomTextField
                             variant="outlined"
-                            name="Email"
+                            name="email"
                             id="Email"
                             placeholder="e.g. `Example@gmail.com`"
                             // helperText={errors.description}
@@ -129,7 +89,6 @@ const FormPayment: FunctionComponent<{ isMobile: boolean, paymentMethod: Payment
                         />
                     </LabeledCustomTextField>
                 </Grid>
-
                 <Grid container sx={{ alignItems: "center", justifyContent: "space-between" }}>
                     {paymentMethod.disable || (<>
                         <Grid item xs={6}>
@@ -143,7 +102,7 @@ const FormPayment: FunctionComponent<{ isMobile: boolean, paymentMethod: Payment
                                     <CustomTextField
                                         variant="outlined"
                                         type="number"
-                                        name="Quantity"
+                                        name="quantity"
                                         id="Quantity"
                                         disabled={paymentMethod.disable}
                                         // helperText={errors.description}
@@ -158,8 +117,6 @@ const FormPayment: FunctionComponent<{ isMobile: boolean, paymentMethod: Payment
                         <CustomButton type="submit">Buy</CustomButton>
                     </Grid>
                 </Grid>
-
-
             </Grid>
         </form>
     )
