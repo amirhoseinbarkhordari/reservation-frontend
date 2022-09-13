@@ -1,13 +1,13 @@
-import type { IconProps } from "../../../types/IconProps";
+import type { IconProps } from "../../types/IconProps";
 import type { ReactElement } from "react";
 import React from "react";
 import { SvgIcon } from "@mui/material";
 
-const BronzeTicket: React.FunctionComponent<IconProps> = (props): ReactElement => {
+const BronzeTicket: React.FunctionComponent<IconProps & {height?: number}> = (props): ReactElement => {
     return (
         <SvgIcon
             htmlColor="transparent"
-            style={{ fontSize: `${props.fontSize}rem`, height: "8rem" }}
+            style={{ fontSize: `${props.fontSize}rem`, height: props.height ? `${props.height}rem` : "8rem" }}
             width="153"
             height="150"
             viewBox="0 0 153 150"

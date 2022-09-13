@@ -3,6 +3,7 @@ import type { FunctionComponent } from "react";
 import { Container, styled, Typography } from "@mui/material";
 import Ticket from "./Ticket";
 import IconList from "./IconList";
+import MobileTicketPlanList from "./MobileTicketPlanList";
 
 const CustomTypography = styled(Typography)(() => ({
     fontWeight: 400,
@@ -11,7 +12,7 @@ const CustomTypography = styled(Typography)(() => ({
     textAlign: "center",
 }));
 
-const AboutProject: FunctionComponent<{ ticketTypes: TicketProps[] }> = (props) => {
+const AboutProject: FunctionComponent<{ ticketTypes: TicketProps[], isMobile: boolean }> = (props) => {
     const ticketTypes = props.ticketTypes;
     return (
         <Container>
@@ -27,13 +28,8 @@ const AboutProject: FunctionComponent<{ ticketTypes: TicketProps[] }> = (props) 
                 its possibilities. The needed information for each plan of the course is fully described below.
             </CustomTypography>
             <IconList />
-            {
-                ticketTypes.map((item) => {
-                    return (
-                        <Ticket key={item.typeTicket} TicketProps={item} />
-                    )
-                })
-            }
+            {props.isMobile ? (<MobileTicketPlanList tickets={ticketTypes}/>) :
+                ticketTypes.map((item) => (<Ticket key={item.id} ticket={item} />))}
         </Container>
     )
 }

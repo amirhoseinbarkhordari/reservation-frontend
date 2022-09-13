@@ -3,6 +3,7 @@ import type { Palette } from "@mui/material";
 import { IconProps } from './IconProps';
 
 export type TicketProps = {
+    id: number;
     typeTicket: string;
     descriptionTicket: string;
     price: number;
