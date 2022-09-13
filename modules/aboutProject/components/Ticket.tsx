@@ -36,7 +36,6 @@ const TicketInfo = styled("div")(({ theme }) => ({
 
 const Ticket: FunctionComponent<{ TicketProps: TicketProps }> = (props) => {
     const { typeTicket, descriptionTicket, price, iconList } = props.TicketProps;
-    const iconsArray = IconsArray;
 
     return (
         <TicketComponent maxWidth="md">
@@ -47,16 +46,17 @@ const Ticket: FunctionComponent<{ TicketProps: TicketProps }> = (props) => {
             </TicketInfo>
             <div style={{ width: "50%" }}>
                 <Typography variant="h5">Price:<span style={{ fontWeight: 800 }}> {price} IRR</span></Typography>
-                <Grid container sx={{ marginTop: "0.8rem" }}>
-                    {
-                        !!iconsArray && iconsArray.map((item) => {
-                            return (
-                                <Grid item key={item.slug} md={5}>
-                                    <item.icon fontSize={2} color={(iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"} />
-                                </Grid>
-                            )
-                        })
-                    }
+                <Grid container rowSpacing={0} columnSpacing={2} sx={{marginTop: "0.8rem"}}>
+                    {IconsArray.slice(0, 5).map((item) => (<Grid item key={item.slug} xs>
+                        <item.icon fontSize={2} color={(iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"}/>
+                    </Grid>))}
+                </Grid>
+                <Grid container rowSpacing={0} columnSpacing={2}>
+                    {IconsArray.slice(5, 10).map((item) => (<Grid item key={item.slug} xs>
+                            <item.icon fontSize={2}
+                                       color={(iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"}/>
+                        </Grid>
+                    ))}
                 </Grid>
             </div>
         </TicketComponent >
