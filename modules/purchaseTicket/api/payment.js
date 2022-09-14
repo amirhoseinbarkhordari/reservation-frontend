@@ -21,7 +21,6 @@ async function payment(data) {
     `,
     variables: { data }
   })
-
   return res.data.requestPayment;
 }
 

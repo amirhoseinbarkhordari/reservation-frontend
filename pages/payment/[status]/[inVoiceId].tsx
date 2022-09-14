@@ -1,22 +1,23 @@
 import { useRouter } from "next/router";
-import Failed from "../../modules/callBack/components/Failed";
-import Success from "../../modules/callBack/components/Success";
+import Failed from "../../../modules/callBack/components/Failed";
+import Success from "../../../modules/callBack/components/Success";
 import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next';
 import { useMediaQuery } from "@mui/material";
 import type { Theme } from "@mui/material";
+import getInvoiceDetail from "../../../modules/callBack/api/getInvoiceDetail"
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const data = context.params;
-    console.log(data);
-    return { props: { data } }
+    const { status, inVoiceId } = context.query;
+    getInvoiceDetail(inVoiceId).then(res => console.log(res))
+    return { props: { status } }
 }
 
-const Payment: NextPage<{ data: InferGetServerSidePropsType<typeof getServerSideProps> }> = (props) => {
+const Payment: NextPage<{ status: string, inVoiceId: number }> = (props) => {
     const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
     return (
         <>
             {
-                (props.data.slug[0] == "success") ?
+                (props.status == "success") ?
                     <Success isMobile={isMobile} />
                     :
                     <Failed />
