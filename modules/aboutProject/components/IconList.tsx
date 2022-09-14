@@ -1,5 +1,5 @@
 import type { FunctionComponent } from "react";
-import { Container, Grid, styled, Typography } from "@mui/material";
+import { Container, Grid, styled, Typography, useTheme } from "@mui/material";
 import IconsArray from "./IconsArray";
 
 const IconListContainer = styled(Grid)(({ theme }) => ({
@@ -8,6 +8,7 @@ const IconListContainer = styled(Grid)(({ theme }) => ({
 }));
 
 const IconList: FunctionComponent = () => {
+    const theme = useTheme();
     return (
         <Container sx={{ margin: "5rem 0" }}>
             <IconListContainer container >
@@ -15,8 +16,14 @@ const IconList: FunctionComponent = () => {
                     return (
                         <Grid key={item.slug} item md={5} xs={12} >
                             <Grid container sx={{ alignItems: "center" }}>
-                                <Grid item xs={2} md={2}><item.icon fontSize={3} color="#1D1D1D" /></Grid>
-                                <Grid item xs={8} md={10}><Typography variant="h3" color="textPrimary">{item.description}</Typography></Grid>
+                                <Grid item xs={2} md={2}>
+                                    <item.icon fontSize={3} color={theme.palette.iconList.main} />
+                                </Grid>
+                                <Grid item xs={8} md={10}>
+                                    <Typography variant="h3" color="textPrimary">
+                                        {item.description}
+                                    </Typography>
+                                </Grid>
                             </Grid>
                         </Grid>
                     )

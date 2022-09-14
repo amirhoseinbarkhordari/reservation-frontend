@@ -5,6 +5,7 @@ declare module "@mui/material/styles/createPalette" {
         golden: Palette["primary"];
         silver: Palette["primary"];
         bronze: Palette["primary"];
+        iconList: Palette["primary"];
         login: Palette["primary"];
     }
 
@@ -12,6 +13,7 @@ declare module "@mui/material/styles/createPalette" {
         golden: PaletteOptions["primary"];
         silver: PaletteOptions["primary"];
         bronze: PaletteOptions["primary"];
+        iconList: PaletteOptions["primary"];
         login: PaletteOptions["primary"];
     }
 }
@@ -80,12 +82,16 @@ export default createTheme({
             main: "#AE845C",
             dark: "#846242",
         },
-        login: {
-            main: "#4CAF50",
-        },
         text: {
             primary: "#1D1D1D",
         },
+        iconList: {
+            light: "#C5C5C5",
+            main: "#1D1D1D",
+        },
+        login: {
+            main: "#4CAF50"
+        }
     },
     shape: {
         borderRadius: 15,
@@ -96,8 +102,7 @@ export default createTheme({
                 root: {
                     fontFamily: "Gilroy",
                     borderRadius: "1rem",
-                    fontSize: "2rem",
-                    height: "5rem",
+                    height: "4rem",
                     color: "white",
                     width: "100%",
                     fontWeight: 700,
@@ -112,17 +117,6 @@ export default createTheme({
                     fontWeight: 600,
                     margin: "2rem 0 0.2rem 0.8rem",
                 }
-            },
-        },
-        MuiOutlinedInput: {
-            styleOverrides: {
-                root: {
-                    borderRadius: 15,
-                    backgroundColor: "#ffffff"
-                },
-                notchedOutline: {
-                    border: "2px solid #DDDDDD",
-                },
             },
         },
         MuiContainer: {
@@ -146,8 +140,8 @@ export default createTheme({
         MuiAvatar: {
             styleOverrides: {
                 root: {
-                    width: 91,
-                    height: 91
+                    width: 80,
+                    height: 80
                 },
             },
         }

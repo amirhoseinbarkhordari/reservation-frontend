@@ -3,7 +3,7 @@ import type { ReactElement } from "react";
 import React from "react";
 import { SvgIcon } from "@mui/material";
 
-const BronzTicket: React.FunctionComponent<IconProps & {height?: number}> = (props): ReactElement => {
+const BronzeTicket: React.FunctionComponent<IconProps & {height?: number}> = (props): ReactElement => {
     return (
         <SvgIcon
             htmlColor="transparent"
@@ -86,4 +86,4 @@ const BronzTicket: React.FunctionComponent<IconProps & {height?: number}> = (pro
     );
 };
 
-export default BronzTicket;
+export default BronzeTicket;

@@ -16,11 +16,20 @@ const AboutProject: FunctionComponent<{ ticketTypes: TicketProps[], isMobile: bo
     const ticketTypes = props.ticketTypes;
     return (
         <Container>
-            <Typography variant="h5" sx={{ fontSize: "2.4rem", margin: "1.5rem 0 1.8rem 0" }}>About This Project</Typography>
-            <CustomTypography variant="h6">Conforming to the demands, 3 different plans of this course are currently available which each of them comes with different pros of its own for the participants; for instance, the course durations, the fees, the services, and the accesses you’ll receive. In the submitting process, besides the traditional approaches, we intended to use blockchain technology and NFTs to improve the user experience and profit from its possibilities. The needed information for each plan of the course is fully described below.</CustomTypography>
+            <Typography variant="h5" sx={{ fontSize: "2.4rem", margin: "1.5rem 0 1.8rem 0" }}>
+                About This Project
+            </Typography>
+            <CustomTypography variant="h6">
+                Conforming to the demands,
+                3 different plans of this course are currently available which each of them comes with different
+                pros of its own for the participants; for instance, the course durations, the fees, the services,
+                and the accesses you’ll receive. In the submitting process, besides the traditional approaches,
+                we intended to use blockchain technology and NFTs to improve the user experience and profit from
+                its possibilities. The needed information for each plan of the course is fully described below.
+            </CustomTypography>
             <IconList />
             {props.isMobile ? (<MobileTicketPlanList tickets={ticketTypes}/>) :
-                ticketTypes.map((item) => (<Ticket key={item.id} TicketProps={item} />))}
+                ticketTypes.map((item) => (<Ticket key={item.id} ticket={item} />))}
         </Container>
     )
 }
