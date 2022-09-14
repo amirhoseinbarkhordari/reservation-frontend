@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material";
+import getLanguageDir from "../../l10n/services/getLanguageDir/getLanguageDir";
 
 declare module "@mui/material/styles/createPalette" {
     interface Palette {
@@ -16,8 +17,8 @@ declare module "@mui/material/styles/createPalette" {
     }
 }
 
-export default createTheme({
-    direction: "ltr",
+export default (locale: string) => createTheme({
+    direction: getLanguageDir(locale),
     typography: {
         fontFamily: "Gilroy",
         fontSize: 14,

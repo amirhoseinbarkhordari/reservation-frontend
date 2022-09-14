@@ -2,16 +2,22 @@ import type { AppProps } from 'next/app'
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import DefaultTheme from "../modules/_app/theme/DefaultTheme";
 import "../modules/_app/assets/stylesheet/fonts.css";
+import LocaleDirectionSetter from "../modules/l10n/components/LocaleDirectionSetter";
+import {useRouter} from "next/router";
 
 
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return (
+    const router = useRouter();
+
+    return (
     <>
-      <ThemeProvider theme={DefaultTheme}>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
+        <LocaleDirectionSetter>
+            <ThemeProvider theme={DefaultTheme(router.locale ?? "en")}>
+                <CssBaseline />
+                <Component {...pageProps} />
+            </ThemeProvider>
+        </LocaleDirectionSetter>
     </>
   );
 }
