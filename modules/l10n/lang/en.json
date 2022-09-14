@@ -1,0 +1,43 @@
+{
+  "header": {
+    "aboutTitle": "About the course",
+    "aboutDesc": "In the courses held by Cafe Market team which only the managers, owners of businesses and organization investors can participate in, in a friendly and interactive environment, with the aid of a professional team, they’ll get instructed to identify their possible flaws and get helped to come up with effective and executable plans that will result in their beneficial improvement.",
+    "mentorsTitle": "Mentors"
+  },
+  "about": {
+    "aboutProjectTitle": "About this project",
+    "aboutProjectDesc": "Conforming to the demands, 3 different plans of this course are currently available which each of them comes with different pros of its own for the participants; for instance, the course durations, the fees, the services, and the accesses you’ll receive. In the submitting process, besides the traditional approaches, we intended to use blockchain technology and NFTs to improve the user experience and profit from its possibilities. The needed information for each plan of the course is fully described below.",
+    "box": {
+      "walletGift": "A hardware wallet gift",
+      "giftCard": "Receiving academy’s gift card",
+      "RSCTgChannelAccess": "Access to the analyzing RSC Telegram channel",
+      "RSCTgGroupAccess": "Access to the interactive group of RSC",
+      "meetingDiscussion": "Educational meeting discussions",
+      "exams": "Complementary sessions and exams",
+      "tradingRooms": "Access to the data and trading rooms",
+      "RSCWatchList": "Receiving the analytical watch lists of RSC",
+      "marketAnalysis": "Analyzing the action market",
+      "parallelMarkets": "Report of the parallel markets"
+    },
+    "tickets": {
+      "gold": {
+        "title": "Golden",
+        "desc": "The Golden plan of this course would be held for the duration of 4 months, in 5 hours sessions. It consists of fundamental and educational meeting discussions, analyzing the action market, recognizing methods for suitable entering and exiting points, and also some special sessions to get the report of the parallel markets that would get complete with receiving the essential data, access to the trading rooms and  analytical watch lists of RSC. At the end of the course, if needed, there would be some complementary sessions and some to answer the questions of participants. Besides having access to the analyzing RSC Telegram channel and the interactive group of RSC, there’s a special academy’s gift card with the credit of 15 million Tomans and a hardware wallet gift for the partakers."
+      },
+      "silver": {
+        "title": "Silver",
+        "desc": "The Silver plan of this course would be held for the duration of 3 months, in 5 hours sessions. It consists of fundamental and educational meeting discussions, analyzing the action market, recognizing methods for suitable entering and exiting points, and also some special sessions to get the report of the parallel markets. At the end of the course, if needed, there would be some complementary sessions and some to answer the questions of participants. Besides having access to analyzing RSC Telegram channel, there’s a special academy gift card with the credit of 10 million Tomans for the partakers."
+      },
+      "bronze": {
+        "title": "Bronze",
+        "desc": "The Bronze plan of this course would be held for the duration of 2.5 months, in 5 hours sessions. It consists of fundamental meeting discussions, analyzing the action market, and recognizing methods for suitable entering and exiting points. At the end of the course, if needed, there would be some complementary sessions and some to answer the questions of participants. Besides having access to analyzing RSC Telegram channel, there’s a special academy gift card with the credit of 5 million Tomans for the partakers."
+      }
+    },
+    "videoTitle": "Enrollment explanation"
+  },
+  "ticketPurchase": {
+    "title": "Purchase the ticket",
+    "ticketsTitle": "Tickets",
+    "paymentTitle": "PaymentMethods"
+  }
+}
