@@ -23,6 +23,7 @@ const FormPayment: FunctionComponent<{
     const theme = useTheme();
     const paymentMethod = props.paymentMethod;
     const ticketInfo = props.ticketInfo;
+
     const CustomButton = styled(Button)(() => ({
         backgroundColor: (theme.palette[ticketInfo.color] as PaletteColor).main,
         margin: "3rem 0",
@@ -36,7 +37,7 @@ const FormPayment: FunctionComponent<{
         initialValues: {
             fullName: '',
             email: '',
-            quantity: ''
+            quantity: 1
         },
         validationSchema: Yup.object({
             fullName: Yup.string().required(),
@@ -47,7 +48,7 @@ const FormPayment: FunctionComponent<{
             const updatableValues = {
                 fullName: values.fullName,
                 email: values.email,
-                quantity: ((paymentMethod.name == "XARB" || !values.quantity) ? 1 : values.quantity),
+                quantity: values.quantity,
                 paymentMethod: paymentMethod.name,
                 productId: 15
             }
@@ -67,7 +68,7 @@ const FormPayment: FunctionComponent<{
                             <CustomTextField variant="outlined" type="number" name="quantity" id="quantity" fullWidth
                                 disabled={paymentMethod.disable}
                                 sx={paymentMethod.disable ? { backgroundColor: "#F0F0F0" } : {}}
-                                value={formik.values.quantity}
+                                value={paymentMethod.disable ? '' : formik.values.quantity}
                                 onBlur={formik.handleBlur} onChange={formik.handleChange}
                                 helperText={formik.touched.quantity && formik.errors.quantity}
                                 error={Boolean(formik.touched.quantity && formik.errors.quantity)}

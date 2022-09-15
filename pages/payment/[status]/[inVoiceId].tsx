@@ -5,20 +5,33 @@ import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from '
 import { useMediaQuery } from "@mui/material";
 import type { Theme } from "@mui/material";
 import getInvoiceDetail from "../../../modules/callBack/api/getInvoiceDetail"
+import type { InvoiceDetailProps } from "../../../modules/shared/types/InvoiceDetailProps";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const { status, inVoiceId } = context.query;
-    getInvoiceDetail(inVoiceId).then(res => console.log(res))
-    return { props: { status } }
+    let invoiceDetail: InvoiceDetailProps;
+    // getInvoiceDetail(inVoiceId).then(res => invoiceDetail = res);
+    invoiceDetail = {
+        data: {
+            quantity: 1,
+            transactionId: "123524",
+            productId: 15,
+            product: {
+                title: "golden",
+                parentId: 1,
+            },
+            status: "successful"
+        }
+    };
+    return { props: { status, invoiceDetail } }
 }
 
-const Payment: NextPage<{ status: string, inVoiceId: number }> = (props) => {
-    const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
+const Payment: NextPage<{ status: string, invoiceDetail: InvoiceDetailProps }> = (props) => {
     return (
         <>
             {
                 (props.status == "success") ?
-                    <Success isMobile={isMobile} />
+                    <Success invoiceDetail={props.invoiceDetail} />
                     :
                     <Failed />
             }
