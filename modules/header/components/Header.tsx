@@ -19,6 +19,10 @@ const ImageDisplay = styled("div")(({ theme }) => ({
     borderRadius: 24,
     position: "relative",
     overflow: "hidden",
+    [theme.breakpoints.down("md")]: {
+        width: "40%",
+        height: 400,
+    },
     [theme.breakpoints.down("sm")]: {
         width: "70%",
         maxHeight: 300,

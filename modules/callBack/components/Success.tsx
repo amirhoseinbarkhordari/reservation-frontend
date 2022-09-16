@@ -1,16 +1,17 @@
-import { Button, Container, Grid, InputAdornment, styled, TextField, Typography } from "@mui/material";
+import { Button, CircularProgress, Container, Grid, InputAdornment, styled, TextField, Typography } from "@mui/material";
 import Link from "next/link";
-import type { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import LabeledCustomTextField from "../../shared/components/formElements/LabelCustomTextField";
 import type { InvoiceDetailProps } from "../../shared/types/InvoiceDetailProps";
 import TicketInvoice from "./TicketInvoice";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 const SuccessContainer = styled(Container)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.light,
-    borderRadius: "4rem 4rem 0 0",
+    borderRadius: "4rem",
     marginTop: "5rem",
     textAlign: "center"
 }));
@@ -26,6 +27,8 @@ const CustomButton = styled(Button)(({ theme }) => ({
 
 const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = (props) => {
 
+    const [disabledButton, setDisabledButton] = useState<boolean>(false);
+
     const formik = useFormik({
         initialValues: {
             walletAddress: "",
@@ -37,10 +40,12 @@ const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = (props
             )
         }),
         onSubmit: values => {
+            setDisabledButton(true);
             const updatableValues = {
                 walletAddress: values.walletAddress,
             }
             console.log(updatableValues);
+            setDisabledButton(false);
         }
     })
 
@@ -72,8 +77,10 @@ const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = (props
                                         InputProps={{
                                             endAdornment: (
                                                 <InputAdornment position="end">
-                                                    {!formik.errors.walletAddress && formik.values.walletAddress &&
-                                                        <CheckCircleIcon color='success' sx={{ fontSize: "25px" }} />}
+                                                    {formik.values.walletAddress && (!formik.errors.walletAddress ?
+                                                        <CheckCircleIcon color='success' sx={{ fontSize: "25px" }} /> :
+                                                        <CancelRoundedIcon color='error' sx={{ fontSize: "25px" }} />)
+                                                    }
                                                 </InputAdornment>
                                             )
                                         }}
@@ -86,7 +93,9 @@ const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = (props
                             </Grid>
                         </Grid>
                         <Grid item xs={2} md={1}>
-                            <CustomButton type="submit">Submit</CustomButton>
+                            <CustomButton type="submit" disabled={!formik.values.walletAddress || disabledButton}>
+                                {disabledButton ? <CircularProgress sx={{ color: "white" }} size={25} /> : "Submit"}
+                            </CustomButton>
                         </Grid>
                     </Grid>
                 </Grid>
