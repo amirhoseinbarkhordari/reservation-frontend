@@ -72,7 +72,14 @@ const Header: FunctionComponent = () => {
                     </Grid>
                     <Grid item xs={12} md={8} lg={8} sx={{ my: 10 }} >
                         <Typography variant="h3">About the course</Typography>
-                        <Typography variant="h6" sx={{ marginTop: "0.5rem" }}>In the courses held by Cafe Market team which only the managers, owners of businesses and organization investors can participate in, in a friendly and interactive environment, with the aid of a professional team, they’ll get instructed to identify their possible flaws and get helped to come up with effective and executable plans that will result in their beneficial improvement.</Typography>
+                        <Typography variant="h6" sx={{ marginTop: "0.5rem" }}>
+                            In the courses held by Cafe Market team which only the managers,
+                            owners of businesses and organization investors can participate in,
+                            in a friendly and interactive environment,
+                            with the aid of a professional team,
+                            they’ll get instructed to identify their possible flaws and get helped to come up with
+                            effective and executable plans that will result in their beneficial improvement.
+                        </Typography>
                         <Typography variant="h3" marginTop="4.2rem">Mentors</Typography>
                         <Actors />
                     </Grid>

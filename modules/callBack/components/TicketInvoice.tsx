@@ -11,7 +11,7 @@ const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = 
     const CustomDiv = styled("div")(({ theme }) => ({
         position: "relative",
         borderRight: "4px solid #000000",
-        width: "40%",
+        height: "100%",
         "&:after": {
             content: "''",
             backgroundColor: theme.palette.secondary.main,
@@ -56,47 +56,51 @@ const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = 
             border: "2px solid #000000",
             boxShadow: "2px 2px 5px black",
         }}>
-            <CustomDiv>
-                <Grid item xs={12}>
-                    Barcode
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography variant="h5" fontSize={{ md: "1.5rem", xs: "0.8rem" }} margin={{ md: "0 5rem", xs: 0 }}>
-                        You should show this at the entrance door.
-                    </Typography>
-                </Grid>
-            </CustomDiv>
-            <div style={{ width: "60%" }}>
-                <Grid container>
-                    <Grid item>
-                        <Typography variant="h3" fontSize={{ xs: "1.5rem", md: "2rem" }} marginTop={{ md: "7rem", xs: "2.5rem" }}>
-                            The Gathering
-                        </Typography>
-                        <Typography variant="h5" fontSize="1.3rem" margin="1rem">
-                            17th Dec, 3:00
+            <Grid item xs={5}>
+                <CustomDiv>
+                    <Grid item xs={12}>
+                        Barcode
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="h5" fontSize={{ md: "1.5rem", xs: "0.8rem" }} margin={{ md: "0 5rem", xs: 0 }}>
+                            You should show this at the entrance door.
                         </Typography>
                     </Grid>
-                </Grid>
-                <Grid container>
-                    <Grid item xs={4}>
-                        <Typography variant="h5" fontSize={{ md: "1.2rem", xs: "0.8rem" }}>
-                            Type: {ticketInfo?.typeTicket}
-                        </Typography>
+                </CustomDiv>
+            </Grid>
+            <Grid item xs={7}>
+                <div>
+                    <Grid container>
+                        <Grid item>
+                            <Typography variant="h3" fontSize={{ xs: "1.5rem", md: "2rem" }} marginTop={{ md: "7rem", xs: "2.5rem" }}>
+                                The Gathering
+                            </Typography>
+                            <Typography variant="h5" fontSize="1.3rem" margin="1rem">
+                                17th Dec, 3:00
+                            </Typography>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={4}>
-                        <Typography variant="h5" fontSize={{ md: "1.2rem", xs: "0.8rem" }}>
-                            Seats: {invoiceDetail.data.quantity}
-                        </Typography>
+                    <Grid container>
+                        <Grid item xs={4}>
+                            <Typography variant="h5" fontSize={{ md: "1.2rem", xs: "0.8rem" }}>
+                                Type: {ticketInfo?.typeTicket}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Typography variant="h5" fontSize={{ md: "1.2rem", xs: "0.8rem" }}>
+                                Seats: {invoiceDetail.data.quantity}
+                            </Typography>
+                        </Grid>
                     </Grid>
-                </Grid>
-                <Grid container>
-                    <Grid item xs={12} textAlign="right">
-                        <Typography variant="h3" fontSize={{ xs: "1rem" }} margin={{ md: "7rem 2rem 1rem 0", xs: "2rem 2rem 1rem 0" }}>
-                            no. {invoiceDetail.data.transactionId}
-                        </Typography>
+                    <Grid container>
+                        <Grid item xs={12} textAlign="right">
+                            <Typography variant="h3" fontSize={{ xs: "1rem" }} margin={{ md: "7rem 2rem 1rem 0", xs: "2rem 2rem 1rem 0" }}>
+                                no. {invoiceDetail.data.transactionId}
+                            </Typography>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </div>
+                </div>
+            </Grid>
         </Grid >
     )
 }

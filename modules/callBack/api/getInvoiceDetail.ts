@@ -1,6 +1,6 @@
 import { ApolloClient, gql, InMemoryCache } from '@apollo/client';
 
-async function getInvoiceDetail(uuid) {
+async function getInvoiceDetail(uuid: string) {
 
   const apolloClient = new ApolloClient({
     uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
@@ -44,6 +44,8 @@ async function getInvoiceDetail(uuid) {
     `,
     variables: { uuid }
   });
+  if (res.data.InvoiceDetails.statusCode >= 400)
+    throw new Error(res.data.InvoiceDetails.message);
   return res.data.invoiceDetails;
 }
 

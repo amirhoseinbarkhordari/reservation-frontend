@@ -1,6 +1,6 @@
 import { Button, Grid, Typography, styled, useTheme, TextField, CircularProgress } from "@mui/material";
 import type { PaletteColor } from "@mui/material";
-import { Dispatch, FunctionComponent, SetStateAction, useState } from "react";
+import { Dispatch, FunctionComponent, SetStateAction } from "react";
 import type { PaymentProps } from "../../shared/types/PaymentProps";
 import LabeledCustomTextField from "../../shared/components/formElements/LabelCustomTextField";
 import type { TicketProps } from "../../shared/types/TicketProps";
@@ -23,7 +23,6 @@ const FormPayment: FunctionComponent<{
     const theme = useTheme();
     const paymentMethod = props.paymentMethod;
     const ticketInfo = props.ticketInfo;
-    const [disabledButton, setDisabledbutton] = useState<boolean>(false);
 
     const CustomButton = styled(Button)(() => ({
         backgroundColor: (theme.palette[ticketInfo.color] as PaletteColor).main,
@@ -45,8 +44,7 @@ const FormPayment: FunctionComponent<{
             email: Yup.string().email().required(),
             quantity: Yup.number().min(1, "Greater Than 0")
         }),
-        onSubmit: values => {
-            setDisabledbutton(true);
+        onSubmit: (values, { setSubmitting }) => {
             const updatableValues = {
                 fullName: values.fullName,
                 email: values.email,
@@ -56,7 +54,7 @@ const FormPayment: FunctionComponent<{
             }
             payment(updatableValues).then(res => {
                 window.location.href = res.data.paymentLink;
-                setDisabledbutton(false);
+                setSubmitting(false);
             })
         }
     })
@@ -128,8 +126,8 @@ const FormPayment: FunctionComponent<{
                         )}
                     </>)}
                     <Grid item xs={12} md={paymentMethod.disable ? 12 : 6}>
-                        <CustomButton type="submit" disabled={disabledButton}>
-                            {disabledButton ? <CircularProgress size={25} sx={{ color: "white" }} /> : "Buy"}
+                        <CustomButton type="submit" disabled={formik.isSubmitting}>
+                            {formik.isSubmitting ? <CircularProgress size={25} sx={{ color: "white" }} /> : "Buy"}
                         </CustomButton>
                     </Grid>
                 </Grid>
