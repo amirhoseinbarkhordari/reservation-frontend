@@ -19,7 +19,6 @@ const Home: NextPage = () => {
                 <TutorialVideo/>
                 <PurchaseTicket ticketTypes={TicketTypes} isMobile={isMobile}/>
             </Container>
-
         </>
     )
 }

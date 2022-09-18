@@ -1,0 +1,1 @@
+export type LanguageDirections = "ltr" | "rtl";
