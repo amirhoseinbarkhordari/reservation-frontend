@@ -1,33 +1,62 @@
 import type { FunctionComponent } from "react";
-import { Box, Grid, PaletteColor, styled, Typography } from "@mui/material";
+import { Grid, PaletteColor, styled, Typography, useTheme } from "@mui/material";
 import { InvoiceDetailProps } from "../../shared/types/InvoiceDetailProps";
 import { TicketTypes } from "../../shared/components/TicketTypes";
 
 const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = (props) => {
     const invoiceDetail = props.invoiceDetail;
-    const ticketInfo = TicketTypes.find((item) => (item.id == invoiceDetail.data.product.parentId))
+    const ticketInfo = TicketTypes.find((item) => (item.id == invoiceDetail.data.product.parentId));
+    const theme = useTheme();
 
-    const CustomGrid = styled(Grid)(({ theme }) => ({
-        borderRadius: "10px",
-        backgroundColor: !!ticketInfo ? (theme.palette[ticketInfo.color] as PaletteColor).main : "",
-        border: "2px solid #000000",
-    }));
-
-    const CustomBox = styled(Box)(({ theme }) => ({
-        backgroundColor: theme.palette.secondary.main,
-        borderRadius: "50%",
-        [theme.breakpoints.down("md")]: {
-            width: "30px",
-            height: "30px"
+    const CustomDiv = styled("div")(({ theme }) => ({
+        position: "relative",
+        borderRight: "4px solid #000000",
+        width: "40%",
+        "&:after": {
+            content: "''",
+            backgroundColor: theme.palette.secondary.main,
+            position: "absolute",
+            borderRadius: "50%",
+            [theme.breakpoints.down("md")]: {
+                width: "30px",
+                height: "30px",
+                right: -17,
+                bottom: -15
+            },
+            width: "50px",
+            height: "50px",
+            right: -27,
+            borderTop: "3px solid black",
+            bottom: -25
         },
-        width: "50px",
-        height: "50px"
+        "&:before": {
+            content: "''",
+            backgroundColor: theme.palette.secondary.main,
+            position: "absolute",
+            borderRadius: "50%",
+            [theme.breakpoints.down("md")]: {
+                width: "30px",
+                height: "30px",
+                right: -17,
+                top: -15
+            },
+            width: "50px",
+            height: "50px",
+            right: -27,
+            borderBottom: "3px solid black",
+            top: -25
+        },
     }));
-
 
     return (
-        <Grid container sx={{ width: { md: "70%", xs: "100%", sm: "70%" } }}>
-            <CustomGrid item xs={5} md={5} sx={{ borderRight: "4px solid #000000", boxShadow: "2px 2px 5px black" }}>
+        <Grid container sx={{
+            width: { md: "70%", xs: "100%", sm: "70%" },
+            backgroundColor: !!ticketInfo ? (theme.palette[ticketInfo.color] as PaletteColor).main : "",
+            borderRadius: "10px",
+            border: "2px solid #000000",
+            boxShadow: "2px 2px 5px black",
+        }}>
+            <CustomDiv>
                 <Grid item xs={12}>
                     Barcode
                 </Grid>
@@ -36,20 +65,8 @@ const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = 
                         You should show this at the entrance door.
                     </Typography>
                 </Grid>
-            </CustomGrid>
-            <Box
-                sx={{
-                    margin: { md: "-25px 135px 0 0", xs: "-14px 63px 0 0", sm: "-13px 90px 0 0" },
-                    display: 'grid',
-                    gridAutoRows: { md: "2px", xs: "3px", sm: "2px" },
-                    gap: { md: 9, xs: 5, sm: 5 },
-                    position: "absolute",
-                }}
-            >
-                <CustomBox sx={{ gridRow: '1/5', borderBottom: "2px solid #000" }} />
-                <CustomBox sx={{ gridRow: '5/5', borderTop: "2px solid #000" }} />
-            </Box>
-            <CustomGrid item xs={7} md={7} sx={{ boxShadow: "2px 2px 5px black" }}>
+            </CustomDiv>
+            <div style={{ width: "60%" }}>
                 <Grid container>
                     <Grid item>
                         <Typography variant="h3" fontSize={{ xs: "1.5rem", md: "2rem" }} marginTop={{ md: "7rem", xs: "2.5rem" }}>
@@ -63,7 +80,7 @@ const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = 
                 <Grid container>
                     <Grid item xs={4}>
                         <Typography variant="h5" fontSize={{ md: "1.2rem", xs: "0.8rem" }}>
-                            Type: {invoiceDetail.data.product.title}
+                            Type: {ticketInfo?.typeTicket}
                         </Typography>
                     </Grid>
                     <Grid item xs={4}>
@@ -79,7 +96,7 @@ const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = 
                         </Typography>
                     </Grid>
                 </Grid>
-            </CustomGrid>
+            </div>
         </Grid >
     )
 }

@@ -9,20 +9,7 @@ import type { InvoiceDetailProps } from "../../../modules/shared/types/InvoiceDe
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const { status, inVoiceId } = context.query;
-    let invoiceDetail: InvoiceDetailProps;
-    // getInvoiceDetail(inVoiceId).then(res => invoiceDetail = res);
-    invoiceDetail = {
-        data: {
-            quantity: 1,
-            transactionId: "123524",
-            productId: 15,
-            product: {
-                title: "golden",
-                parentId: 1,
-            },
-            status: "successful"
-        }
-    };
+    const invoiceDetail = await getInvoiceDetail(inVoiceId);
     return { props: { status, invoiceDetail } }
 }
 

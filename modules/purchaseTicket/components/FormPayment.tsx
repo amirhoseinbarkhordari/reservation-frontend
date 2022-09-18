@@ -54,8 +54,10 @@ const FormPayment: FunctionComponent<{
                 paymentMethod: paymentMethod.name,
                 productId: 15
             }
-            payment(updatableValues).then(res => window.location.href = res.data.paymentLink)
-            setDisabledbutton(false);
+            payment(updatableValues).then(res => {
+                window.location.href = res.data.paymentLink;
+                setDisabledbutton(false);
+            })
         }
     })
 
