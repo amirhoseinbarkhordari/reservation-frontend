@@ -22,7 +22,7 @@ async function getInvoiceDetail(uuid: string) {
             amountDollar
             amountRial
             productId
-            product{
+            product {
               id
               title
               uuid
@@ -30,10 +30,25 @@ async function getInvoiceDetail(uuid: string) {
               priceRial
               priceDollar
               availableQuantity
+              displayStyle
               link
               isPurchasable
               status
             }
+            productParents {
+              id
+              title
+              uuid
+              parentId
+              priceRial
+              priceDollar
+              availableQuantity
+              displayStyle
+              link
+              isPurchasable
+              status
+            }
+            updatedAt
             paymentLink
             status
           }
@@ -44,8 +59,8 @@ async function getInvoiceDetail(uuid: string) {
     `,
     variables: { uuid }
   });
-  if (res.data.InvoiceDetails.statusCode >= 400)
-    throw new Error(res.data.InvoiceDetails.message);
+  if (res.data.invoiceDetails.statusCode >= 400)
+    throw new Error(res.data.invoiceDetails.message);
   return res.data.invoiceDetails;
 }
 

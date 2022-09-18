@@ -12,6 +12,8 @@ export type InvoiceDetailProps = {
         amountRial?: string;
         productId: number;
         product: ProductProps;
+        productParents: productParentsProps[];
+        updatedAt?: string;
         paymentLink?: string;
         status: string;
     }
@@ -27,6 +29,21 @@ export type ProductProps = {
     priceRial?: string;
     priceDollar?: string;
     availableQuantity?: number;
+    displayStyle?: string;
+    link?: string;
+    isPurchasable?: boolean;
+    status?: string;
+}
+
+export type productParentsProps = {
+    id?: number;
+    title: string;
+    uuid?: string;
+    parentId: number;
+    priceRial?: string;
+    priceDollar?: string;
+    availableQuantity?: number;
+    displayStyle?: string;
     link?: string;
     isPurchasable?: boolean;
     status?: string;

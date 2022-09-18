@@ -5,7 +5,9 @@ import { TicketTypes } from "../../shared/components/TicketTypes";
 
 const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = (props) => {
     const invoiceDetail = props.invoiceDetail;
-    const ticketInfo = TicketTypes.find((item) => (item.id == invoiceDetail.data.product.parentId));
+    const typeTicket = invoiceDetail.data.productParents.find((item) => (!!item.displayStyle))?.displayStyle;
+    const ticketInfo = TicketTypes.find((item) => (item.typeTicket.toLowerCase() == typeTicket?.toLowerCase()));
+    const updatedTime = invoiceDetail.data.updatedAt?.split(/^([\d-]+)\w{1}([\d:]+).*$/)
     const theme = useTheme();
 
     const CustomDiv = styled("div")(({ theme }) => ({
@@ -76,14 +78,14 @@ const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = 
                                 The Gathering
                             </Typography>
                             <Typography variant="h5" fontSize="1.3rem" margin="1rem">
-                                17th Dec, 3:00
+                                {!!updatedTime && `${updatedTime[1]} , ${updatedTime[2]}`}
                             </Typography>
                         </Grid>
                     </Grid>
                     <Grid container>
                         <Grid item xs={4}>
                             <Typography variant="h5" fontSize={{ md: "1.2rem", xs: "0.8rem" }}>
-                                Type: {ticketInfo?.typeTicket}
+                                Type:{typeTicket?.toLowerCase()}
                             </Typography>
                         </Grid>
                         <Grid item xs={4}>
