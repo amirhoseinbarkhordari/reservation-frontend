@@ -2,6 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import type { Dispatch, FunctionComponent, SetStateAction } from "react";
 import DisableTicket from "../../shared/components/icons/ticketIcons/DisableTicket";
 import type { TicketProps } from "../../shared/types/TicketProps";
+import {useTranslations} from "use-intl";
 
 const TicketTypes: FunctionComponent<{
     ticketTypes: TicketProps[],
@@ -9,7 +10,7 @@ const TicketTypes: FunctionComponent<{
     setTicketInfo: Dispatch<SetStateAction<TicketProps>>,
     ticketInfo: TicketProps
 }> = (props) => {
-
+    const _ = useTranslations('about.tickets')
     return (
         <Grid container sx={{ margin: "3rem 0", textAlign: "center" }}>
             {
@@ -20,7 +21,7 @@ const TicketTypes: FunctionComponent<{
                             <Icon fontSize={8} />
                             {!props.isMoblie &&
                                 <Typography variant="h6" sx={{ margin: "1.5rem 0 0 1.5rem" }}>
-                                    {item.typeTicket}
+                                    {_(`${item.typeTicket}.title`)}
                                 </Typography>
                             }
                         </Grid>

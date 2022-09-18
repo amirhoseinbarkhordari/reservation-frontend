@@ -23,4 +23,12 @@ const Home: NextPage = () => {
     )
 }
 
+export async function getStaticProps({locale}) {
+    return {
+        props: {
+            messages: (await import(`../modules/l10n/lang/${locale}.json`)).default
+        }
+    };
+}
+
 export default Home

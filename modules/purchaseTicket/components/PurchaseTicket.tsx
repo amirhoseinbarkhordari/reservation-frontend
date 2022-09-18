@@ -6,6 +6,7 @@ import type { TicketProps } from "../../shared/types/TicketProps";
 import { PaymentMethodList } from "./PaymentMethodList";
 import TicketTypes from "./TicketTypes";
 import FormPayment from "./FormPayment";
+import {useTranslations} from "use-intl";
 
 const PurchaseContainer = styled(Container)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.light,
@@ -27,23 +28,24 @@ const PurchaseTicket: FunctionComponent<{ ticketTypes: TicketProps[], isMobile: 
     const ismobile = props.isMobile;
     const [ticketInfo, setTicketInfo] = useState<TicketProps>(props.ticketTypes[0]);
     const [paymentMethod, setPaymentMethod] = useState<PaymentProps>(PaymentMethodList[0]);
+    const _ = useTranslations('ticketPurchase');
 
     return (
         <PurchaseContainer>
-            <CustomTypography variant="h3">Purchase the Ticket</CustomTypography>
+            <CustomTypography variant="h3">{_('title')}</CustomTypography>
             <Grid container sx={{ gap: "10rem" }}>
                 {!ismobile &&
                     <Grid item md={5}>
-                        <Typography variant="h5" sx={{ fontSize: "1.8rem" }}>Description</Typography>
+                        <Typography variant="h5" sx={{ fontSize: "1.8rem" }}>{_('descTitle')}</Typography>
                         <Typography variant="h5" sx={{ textAlign: "justify", fontWeight: 400, marginTop: "1.5rem" }}>
-                            {paymentMethod.description}
+                            {_(`methods.${paymentMethod.name}.desc`)}
                         </Typography>
                     </Grid>
                 }
                 <Grid item md={5}>
-                    <Typography variant="h5" sx={{ textAlign: { xs: "center", md: "left" }, fontSize: "1.8rem" }}>Tickets</Typography>
+                    <Typography variant="h5" sx={{ textAlign: { xs: "center", md: "left" }, fontSize: "1.8rem" }}>{_('ticketsTitle')}</Typography>
                     <TicketTypes ticketTypes={props.ticketTypes} isMoblie={ismobile} setTicketInfo={setTicketInfo} ticketInfo={ticketInfo} />
-                    <Typography variant="h5" sx={{ textAlign: { xs: "center", md: "left" }, fontSize: "1.8rem", marginBottom: "2rem" }}>Payment Methods</Typography>
+                    <Typography variant="h5" sx={{ textAlign: { xs: "center", md: "left" }, fontSize: "1.8rem", marginBottom: "2rem" }}>{_('paymentTitle')}</Typography>
                     <FormPayment isMobile={ismobile} paymentMethod={paymentMethod} ticketInfo={ticketInfo} setPaymentMethod={setPaymentMethod} />
                 </Grid>
             </Grid >

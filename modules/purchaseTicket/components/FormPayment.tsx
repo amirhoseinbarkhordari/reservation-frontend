@@ -1,6 +1,6 @@
 import { Button, Grid, Typography, styled, useTheme, TextField, CircularProgress } from "@mui/material";
 import type { PaletteColor } from "@mui/material";
-import { Dispatch, FunctionComponent, SetStateAction } from "react";
+import type { Dispatch, FunctionComponent, SetStateAction } from "react";
 import type { PaymentProps } from "../../shared/types/PaymentProps";
 import LabeledCustomTextField from "../../shared/components/formElements/LabelCustomTextField";
 import type { TicketProps } from "../../shared/types/TicketProps";
@@ -8,6 +8,7 @@ import payment from "../api/payment";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import PaymentMethods from "./PaymentMethods";
+import {useTranslations} from "use-intl";
 
 const CustomTextField = styled(TextField)(() => ({
     backgroundColor: "#fff",
@@ -20,6 +21,7 @@ const FormPayment: FunctionComponent<{
     ticketInfo: TicketProps,
     setPaymentMethod: Dispatch<SetStateAction<PaymentProps>>
 }> = (props) => {
+    const _ = useTranslations('ticketPurchase.form');
     const theme = useTheme();
     const paymentMethod = props.paymentMethod;
     const ticketInfo = props.ticketInfo;
@@ -44,7 +46,7 @@ const FormPayment: FunctionComponent<{
             email: Yup.string().email().required(),
             quantity: Yup.number().min(1, "Greater Than 0")
         }),
-        onSubmit: (values, { setSubmitting }) => {
+        onSubmit: (values) => {
             const updatableValues = {
                 fullName: values.fullName,
                 email: values.email,
@@ -54,7 +56,6 @@ const FormPayment: FunctionComponent<{
             }
             payment(updatableValues).then(res => {
                 window.location.href = res.data.paymentLink;
-                setSubmitting(false);
             })
         }
     })
@@ -67,7 +68,7 @@ const FormPayment: FunctionComponent<{
                 </Grid >
                 {!props.isMobile ?
                     <Grid item md={3}>
-                        <LabeledCustomTextField id="quantity" label="Quantity">
+                        <LabeledCustomTextField id="quantity" label={_('inputs.quantity.label')}>
                             <CustomTextField variant="outlined" type="number" name="quantity" id="quantity" fullWidth
                                 disabled={paymentMethod.disable}
                                 sx={paymentMethod.disable ? { backgroundColor: "#F0F0F0" } : {}}
@@ -86,18 +87,18 @@ const FormPayment: FunctionComponent<{
                     </Grid>
                 }
                 <Grid item xs={12}>
-                    <LabeledCustomTextField id="fullName" label="Full Name">
+                    <LabeledCustomTextField id="fullName" label={_('inputs.fullName.label')}>
                         <CustomTextField variant="outlined" name="fullName" id="fullName" fullWidth
-                            placeholder="e.g. `Amir Ramzali ...`"
+                            placeholder={_('inputs.fullName.placeHolder')}
                             value={formik.values.fullName}
                             onBlur={formik.handleBlur} onChange={formik.handleChange}
                             helperText={formik.touched.fullName && formik.errors.fullName}
                             error={Boolean(formik.touched.fullName && formik.errors.fullName)}
                         />
                     </LabeledCustomTextField>
-                    <LabeledCustomTextField id="email" label="Email">
+                    <LabeledCustomTextField id="email" label={_('inputs.email.label')}>
                         <CustomTextField variant="outlined" name="email" id="email" fullWidth
-                            placeholder="e.g. `Example@gmail.com`"
+                            placeholder={_('inputs.email.placeHolder')}
                             value={formik.values.email}
                             onBlur={formik.handleBlur} onChange={formik.handleChange}
                             helperText={formik.touched.email && formik.errors.email}
@@ -108,13 +109,13 @@ const FormPayment: FunctionComponent<{
                 <Grid container sx={{ alignItems: "center", justifyContent: "space-between" }}>
                     {paymentMethod.disable || (<>
                         <Grid item xs={6}>
-                            <LabeledCustomTextField id="TotalPrice" label="Total Price:" >
+                            <LabeledCustomTextField id="TotalPrice" label={_('totalPriceLabel')}>
                                 <span style={{ fontSize: "1.5rem", fontWeight: 700 }}>{ticketInfo.price} IRR</span>
                             </LabeledCustomTextField>
                         </Grid>
                         {props.isMobile && (
                             <Grid item xs={4}>
-                                <LabeledCustomTextField id="quantity" label="Quantity">
+                                <LabeledCustomTextField id="quantity" label={_('inputs.quantity.label')}>
                                     <CustomTextField variant="outlined" type="number" name="quantity" id="quantity" fullWidth
                                         value={formik.values.quantity}
                                         onBlur={formik.handleBlur} onChange={formik.handleChange}
@@ -127,7 +128,7 @@ const FormPayment: FunctionComponent<{
                     </>)}
                     <Grid item xs={12} md={paymentMethod.disable ? 12 : 6}>
                         <CustomButton type="submit" disabled={formik.isSubmitting}>
-                            {formik.isSubmitting ? <CircularProgress size={25} sx={{ color: "white" }} /> : "Buy"}
+                            {formik.isSubmitting ? <CircularProgress size={25} sx={{ color: "white" }} /> : _('buy')}
                         </CustomButton>
                     </Grid>
                 </Grid>

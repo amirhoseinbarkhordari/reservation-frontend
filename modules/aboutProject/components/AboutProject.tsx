@@ -4,6 +4,7 @@ import { Container, styled, Typography } from "@mui/material";
 import Ticket from "./Ticket";
 import IconList from "./IconList";
 import MobileTicketPlanList from "./MobileTicketPlanList";
+import {useTranslations} from "use-intl";
 
 const CustomTypography = styled(Typography)(() => ({
     fontWeight: 400,
@@ -14,18 +15,14 @@ const CustomTypography = styled(Typography)(() => ({
 
 const AboutProject: FunctionComponent<{ ticketTypes: TicketProps[], isMobile: boolean }> = (props) => {
     const ticketTypes = props.ticketTypes;
+    const _ = useTranslations("about")
     return (
         <Container>
             <Typography variant="h5" sx={{ fontSize: "2.4rem", margin: "1.5rem 0 1.8rem 0" }}>
-                About This Project
+                {_('aboutProjectTitle')}
             </Typography>
             <CustomTypography variant="h6">
-                Conforming to the demands,
-                3 different plans of this course are currently available which each of them comes with different
-                pros of its own for the participants; for instance, the course durations, the fees, the services,
-                and the accesses you’ll receive. In the submitting process, besides the traditional approaches,
-                we intended to use blockchain technology and NFTs to improve the user experience and profit from
-                its possibilities. The needed information for each plan of the course is fully described below.
+                {_('aboutProjectDesc')}
             </CustomTypography>
             <IconList />
             {props.isMobile ? (<MobileTicketPlanList tickets={ticketTypes}/>) :
