@@ -9,9 +9,10 @@ const ActorsStyle = styled("div")(() => ({
     textAlign: "center",
 }));
 
-const PersonalInfo = styled("div")(() => ({
+const PersonalInfo = styled("div")<{bordered: boolean}>(({bordered}) => ({
     flexDirection: "column",
     padding: "1rem 0.8rem 0 0.8rem",
+    borderRight: bordered ? "1px solid rgba(0, 0, 0, 0.28)" : "none"
 }));
 
 const Actors: FunctionComponent = () => {
@@ -21,7 +22,7 @@ const Actors: FunctionComponent = () => {
             {
                 !!item && item.map((item, index) => {
                     return (
-                        <PersonalInfo key={item} style={(index == 0) ? { borderRight: "1px solid rgba(0, 0, 0, 0.28)" } : {}}>
+                        <PersonalInfo key={item} bordered={index == 0}>
                             <Avatar />
                             <div style={{ marginTop: "0.7rem" }}>
                                 <Typography variant="h5" sx={{ fontSize: "1rem" }}>Asghar Farhadi</Typography>

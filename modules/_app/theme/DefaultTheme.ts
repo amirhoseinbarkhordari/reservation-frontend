@@ -22,7 +22,7 @@ declare module "@mui/material/styles/createPalette" {
 export default (locale: string) => createTheme({
     direction: getLanguageDir(locale),
     typography: {
-        fontFamily: "Gilroy",
+        fontFamily: "Peyda, Gilroy",
         fontSize: 14,
         h1: {
             fontWeight: 700,
@@ -101,7 +101,7 @@ export default (locale: string) => createTheme({
         MuiButton: {
             styleOverrides: {
                 root: {
-                    fontFamily: "Gilroy",
+                    fontFamily: "Peyda, Gilroy",
                     borderRadius: "1rem",
                     height: "4rem",
                     color: "white",

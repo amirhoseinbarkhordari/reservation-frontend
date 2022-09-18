@@ -1,6 +1,7 @@
 import type { FunctionComponent } from "react";
 import { Container, Grid, styled, Typography, useTheme } from "@mui/material";
 import IconsArray from "./IconsArray";
+import {useTranslations} from "use-intl";
 
 const IconListContainer = styled(Grid)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.dark,
@@ -9,6 +10,7 @@ const IconListContainer = styled(Grid)(({ theme }) => ({
 
 const IconList: FunctionComponent = () => {
     const theme = useTheme();
+    const _ = useTranslations('about.box')
     return (
         <Container sx={{ margin: "5rem 0" }}>
             <IconListContainer container >
@@ -21,7 +23,7 @@ const IconList: FunctionComponent = () => {
                                 </Grid>
                                 <Grid item xs={8} md={10}>
                                     <Typography variant="h3" color="textPrimary">
-                                        {item.description}
+                                        {_(item.slug)}
                                     </Typography>
                                 </Grid>
                             </Grid>

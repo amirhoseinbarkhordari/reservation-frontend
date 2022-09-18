@@ -4,6 +4,7 @@ import Image from "next/image";
 import backImage from "../asset/image/backgroundImage.jpg"
 import headerImage from "../asset/image/headerImage.jpg"
 import Actors from "./Actors";
+import {useTranslations} from "use-intl";
 
 const CustomContainer = styled("div")(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
@@ -28,7 +29,7 @@ const ImageDisplay = styled("div")(({ theme }) => ({
 }));
 
 const Header: FunctionComponent = () => {
-
+    const _ = useTranslations("header");
     return (
         <div style={{ display: "flex", flexWrap: "wrap" }}>
             <CustomContainer>
@@ -49,9 +50,9 @@ const Header: FunctionComponent = () => {
                         <ImageDisplay>
                             <Image layout="fill" src={backImage} alt="Cover of the page" />
                         </ImageDisplay>
-                        <Typography variant="h1" sx={{ marginTop: "1.8rem" }}>Cafe Market</Typography>
-                        <Typography variant="h5" sx={{ marginTop: "1rem" }}>Scheduled for:</Typography>
-                        <Typography variant="h2">17 jun, 2022, 2:30pm</Typography>
+                        <Typography variant="h1" sx={{ marginTop: "1.8rem" }}>{_('cardTitle')}</Typography>
+                        <Typography variant="h5" sx={{ marginTop: "1rem" }}>{_('timeLabel')}</Typography>
+                        <Typography variant="h2">{_('time')}</Typography>
                         {/* <Rating name="read-only" value={4} sx={{ color: "#24282E" }} readOnly /> */}
                         {/* {
                     item ? (
@@ -67,9 +68,9 @@ const Header: FunctionComponent = () => {
                     )} */}
                     </Grid>
                     <Grid item xs={12} md={8} lg={8} sx={{ my: 10 }} >
-                        <Typography variant="h3">About the course</Typography>
-                        <Typography variant="h6" sx={{ marginTop: "0.5rem" }}>In the courses held by Cafe Market team which only the managers, owners of businesses and organization investors can participate in, in a friendly and interactive environment, with the aid of a professional team, they’ll get instructed to identify their possible flaws and get helped to come up with effective and executable plans that will result in their beneficial improvement.</Typography>
-                        <Typography variant="h3" marginTop="4.2rem">Mentors</Typography>
+                        <Typography variant="h3">{_('aboutTitle')}</Typography>
+                        <Typography variant="h6" sx={{ marginTop: "0.5rem" }}>{_('aboutDesc')}</Typography>
+                        <Typography variant="h3" marginTop="4.2rem">{_('mentorsTitle')}</Typography>
                         <Actors />
                     </Grid>
                 </Grid >

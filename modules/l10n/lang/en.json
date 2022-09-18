@@ -2,25 +2,29 @@
   "header": {
     "aboutTitle": "About the course",
     "aboutDesc": "In the courses held by Cafe Market team which only the managers, owners of businesses and organization investors can participate in, in a friendly and interactive environment, with the aid of a professional team, they’ll get instructed to identify their possible flaws and get helped to come up with effective and executable plans that will result in their beneficial improvement.",
-    "mentorsTitle": "Mentors"
+    "mentorsTitle": "Mentors",
+    "cardTitle": "Cafe Market",
+    "timeLabel": "Scheduled for",
+    "time": "17 jun, 2022, 2:30pm"
   },
   "about": {
     "aboutProjectTitle": "About this project",
     "aboutProjectDesc": "Conforming to the demands, 3 different plans of this course are currently available which each of them comes with different pros of its own for the participants; for instance, the course durations, the fees, the services, and the accesses you’ll receive. In the submitting process, besides the traditional approaches, we intended to use blockchain technology and NFTs to improve the user experience and profit from its possibilities. The needed information for each plan of the course is fully described below.",
     "box": {
-      "walletGift": "A hardware wallet gift",
-      "giftCard": "Receiving academy’s gift card",
-      "RSCTgChannelAccess": "Access to the analyzing RSC Telegram channel",
-      "RSCTgGroupAccess": "Access to the interactive group of RSC",
-      "meetingDiscussion": "Educational meeting discussions",
-      "exams": "Complementary sessions and exams",
-      "tradingRooms": "Access to the data and trading rooms",
-      "RSCWatchList": "Receiving the analytical watch lists of RSC",
-      "marketAnalysis": "Analyzing the action market",
-      "parallelMarkets": "Report of the parallel markets"
+      "HardwareWalletIcon": "A hardware wallet gift",
+      "GiftCardIcon": "Receiving academy’s gift card",
+      "TelegramChannelIcon": "Access to the analyzing RSC Telegram channel",
+      "TelegramGroupIcon": "Access to the interactive group of RSC",
+      "EducationIcon": "Educational meeting discussions",
+      "ExamsIcon": "Complementary sessions and exams",
+      "TradingIcon": "Access to the data and trading rooms",
+      "ReceiveIcon": "Receiving the analytical watch lists of RSC",
+      "TeamIcon": "Analyzing the action market",
+      "CircleChartIcon": "Report of the parallel markets"
     },
     "tickets": {
-      "gold": {
+      "priceLabel": "Price",
+      "golden": {
         "title": "Golden",
         "desc": "The Golden plan of this course would be held for the duration of 4 months, in 5 hours sessions. It consists of fundamental and educational meeting discussions, analyzing the action market, recognizing methods for suitable entering and exiting points, and also some special sessions to get the report of the parallel markets that would get complete with receiving the essential data, access to the trading rooms and  analytical watch lists of RSC. At the end of the course, if needed, there would be some complementary sessions and some to answer the questions of participants. Besides having access to the analyzing RSC Telegram channel and the interactive group of RSC, there’s a special academy’s gift card with the credit of 15 million Tomans and a hardware wallet gift for the partakers."
       },
@@ -33,11 +37,46 @@
         "desc": "The Bronze plan of this course would be held for the duration of 2.5 months, in 5 hours sessions. It consists of fundamental meeting discussions, analyzing the action market, and recognizing methods for suitable entering and exiting points. At the end of the course, if needed, there would be some complementary sessions and some to answer the questions of participants. Besides having access to analyzing RSC Telegram channel, there’s a special academy gift card with the credit of 5 million Tomans for the partakers."
       }
     },
-    "videoTitle": "Enrollment explanation"
+    "videoTitle": "Enrollment explanation",
+    "avatars": {
+      "ramzali": {
+        "name": "Amir Ramzali",
+        "role": "Tutor"
+      }
+    }
   },
   "ticketPurchase": {
     "title": "Purchase the ticket",
+    "descTitle": "Description",
     "ticketsTitle": "Tickets",
-    "paymentTitle": "PaymentMethods"
+    "paymentTitle": "Payment Methods",
+    "methods": {
+      "XARB": {
+        "title": "xarb",
+        "desc": "By purchasing directly from Xarb NFT marketplace, not only you would get a 10% off on the course, but this way, you’ll complete your registration by collecting the NFT on it. Owning the NFT of each course comes with its own specific utilities and pros for the owner. If you already have a wallet and owe the desired amount of MATRIC cryptocurrency, this choice is the most ideal for you."
+      },
+      "ZARINPAL": {
+        "title": "Zarinpal",
+        "desc": "If you choose Shaparak as your payment method for the course,you can complete the enrollment procedure using Rial currency.Although you wouldn’t buy the NFT of the course this way,you can make a wallet and enter your public address after the compilation,and the NFT gets transferred to you.This method is suitable for the ones who don’tcurrently have a wallet address and MATIC for their NFT purchase on Xarb."
+      }
+    },
+    "form":  {
+      "inputs": {
+        "quantity": {
+          "label": "Quantity",
+          "placeHolder": ""
+        },
+        "fullName": {
+          "label": "Full Name",
+          "placeHolder": "e.g. `Amir Ramzali ...`"
+        },
+        "email": {
+          "label": "Email",
+          "placeHolder": "e.g. `Example@gmail.com`"
+        }
+      },
+      "totalPriceLabel": "Total Price",
+      "buy": "Buy"
+    }
   }
 }
