@@ -28,7 +28,7 @@ const CustomButton = styled(Button)(({ theme }) => ({
 const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = (props) => {
     const formik = useFormik({
         initialValues: {
-            walletAddress: props.invoiceDetail.data.walletAddress,
+            walletAddress: props.invoiceDetail.data.walletAddress ?? '',
         },
         validationSchema: Yup.object({
             walletAddress: Yup.string().required().matches(
@@ -48,49 +48,41 @@ const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = (props
     return (
         <form onSubmit={formik.handleSubmit}>
             <SuccessContainer sx={{ width: { md: "90%", xs: "100%" } }}>
-                <Grid container >
-                    <Grid item xs={12}>
-                        <Typography variant="h4" margin="5rem 0">Successful Purchase!</Typography>
+                <Typography variant="h4" margin="5rem 0">Successful Purchase!</Typography>
+                <TicketInvoice invoiceDetail={props.invoiceDetail} />
+                <Typography variant="h4" fontSize="1.4rem" margin="2rem 0">You can also receive the NFT of this Ticket</Typography>
+                <Grid container spacing={1}>
+                    <Grid item xs={9} md={3} textAlign="left">
+                        <LabeledCustomTextField id="walletAddress" label="Wallet Address (optional)">
+                            <TextField name="walletAddress" id="walletAddress" fullWidth
+                                       sx={{ backgroundColor: "#fff", borderRadius: "1.2rem" }}
+                                       value={formik.values.walletAddress}
+                                       onBlur={formik.handleBlur} onChange={formik.handleChange}
+                                       helperText={formik.touched.walletAddress && formik.errors.walletAddress}
+                                       error={Boolean(formik.touched.walletAddress && formik.errors.walletAddress)}
+                                       InputProps={{
+                                           endAdornment: (
+                                               <InputAdornment position="end">
+                                                   {formik.values.walletAddress && (!formik.errors.walletAddress ?
+                                                       <CheckCircleIcon color='success' sx={{ fontSize: "25px" }} /> :
+                                                       <CancelRoundedIcon color='error' sx={{ fontSize: "25px" }} />)
+                                                   }
+                                               </InputAdornment>
+                                           )
+                                       }}
+                            />
+                        </LabeledCustomTextField>
+                        <Typography sx={{ textAlign: "center" }}>
+                            <Link href="https://google.com"><a>how to make one?</a></Link>
+                        </Typography>
                     </Grid>
-                    <TicketInvoice invoiceDetail={props.invoiceDetail} />
-                    <Grid container>
-                        <Grid item xs={12}>
-                            <Typography variant="h4" fontSize="1.4rem" margin="2rem 0">You can also recieve the NFT of this Ticket</Typography>
-                        </Grid>
-                    </Grid>
-                    <Grid container spacing={1}>
-                        <Grid item xs={9} md={3} textAlign="left">
-                            <LabeledCustomTextField id="walletAddress" label="Wallet Address (optional)">
-                                <TextField name="walletAddress" id="walletAddress" fullWidth
-                                    sx={{ backgroundColor: "#fff", borderRadius: "1.2rem" }}
-                                    value={formik.values.walletAddress}
-                                    onBlur={formik.handleBlur} onChange={formik.handleChange}
-                                    helperText={formik.touched.walletAddress && formik.errors.walletAddress}
-                                    error={Boolean(formik.touched.walletAddress && formik.errors.walletAddress)}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                {formik.values.walletAddress && (!formik.errors.walletAddress ?
-                                                    <CheckCircleIcon color='success' sx={{ fontSize: "25px" }} /> :
-                                                    <CancelRoundedIcon color='error' sx={{ fontSize: "25px" }} />)
-                                                }
-                                            </InputAdornment>
-                                        )
-                                    }}
-                                />
-                            </LabeledCustomTextField>
-                            <Typography sx={{ textAlign: "center" }}>
-                                <Link href="https://google.com"><a>how to make one?</a></Link>
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={2} md={1}>
-                            {
-                                !props.invoiceDetail.data.walletAddress &&
-                                <CustomButton type="submit" disabled={!formik.values.walletAddress || formik.isSubmitting}>
-                                    {formik.isSubmitting ? <CircularProgress sx={{ color: "white" }} size={25} /> : "Submit"}
-                                </CustomButton>
-                            }
-                        </Grid>
+                    <Grid item xs={2} md={1}>
+                        {
+                            !props.invoiceDetail.data.walletAddress &&
+                            <CustomButton type="submit" disabled={!formik.values.walletAddress || formik.isSubmitting}>
+                                {formik.isSubmitting ? <CircularProgress sx={{ color: "white" }} size={25} /> : "Submit"}
+                            </CustomButton>
+                        }
                     </Grid>
                 </Grid>
             </SuccessContainer >
