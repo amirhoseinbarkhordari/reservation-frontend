@@ -26,10 +26,9 @@ const CustomButton = styled(Button)(({ theme }) => ({
 }));
 
 const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = (props) => {
-
     const formik = useFormik({
         initialValues: {
-            walletAddress: "",
+            walletAddress: props.invoiceDetail.data.walletAddress,
         },
         validationSchema: Yup.object({
             walletAddress: Yup.string().required().matches(
@@ -85,9 +84,12 @@ const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = (props
                             </Typography>
                         </Grid>
                         <Grid item xs={2} md={1}>
-                            <CustomButton type="submit" disabled={!formik.values.walletAddress || formik.isSubmitting}>
-                                {formik.isSubmitting ? <CircularProgress sx={{ color: "white" }} size={25} /> : "Submit"}
-                            </CustomButton>
+                            {
+                                !props.invoiceDetail.data.walletAddress &&
+                                <CustomButton type="submit" disabled={!formik.values.walletAddress || formik.isSubmitting}>
+                                    {formik.isSubmitting ? <CircularProgress sx={{ color: "white" }} size={25} /> : "Submit"}
+                                </CustomButton>
+                            }
                         </Grid>
                     </Grid>
                 </Grid>
