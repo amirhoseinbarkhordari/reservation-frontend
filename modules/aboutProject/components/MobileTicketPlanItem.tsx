@@ -21,7 +21,7 @@ const MobileTicketPlanItem: FunctionComponent<{ ticket: TicketProps }> = ({ticke
         <Typography marginTop={1.5} variant="h5">
             {ticket.price}
         </Typography>
-        <Typography variant="body" marginTop={3} textAlign="center">
+        <Typography variant="body1" marginTop={3} textAlign="center">
             {_(`${ticket.typeTicket}.desc`)}
         </Typography>
         <div>

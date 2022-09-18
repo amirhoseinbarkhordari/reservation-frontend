@@ -20,6 +20,10 @@ const ImageDisplay = styled("div")(({ theme }) => ({
     borderRadius: 24,
     position: "relative",
     overflow: "hidden",
+    [theme.breakpoints.down("md")]: {
+        width: "40%",
+        height: 400,
+    },
     [theme.breakpoints.down("sm")]: {
         width: "70%",
         maxHeight: 300,
@@ -69,7 +73,8 @@ const Header: FunctionComponent = () => {
                     </Grid>
                     <Grid item xs={12} md={8} lg={8} sx={{ my: 10 }} >
                         <Typography variant="h3">{_('aboutTitle')}</Typography>
-                        <Typography variant="h6" sx={{ marginTop: "0.5rem" }}>{_('aboutDesc')}</Typography>
+                        <Typography variant="h6" sx={{ marginTop: "0.5rem" }}>
+                            {_('aboutDesc')}                        </Typography>
                         <Typography variant="h3" marginTop="4.2rem">{_('mentorsTitle')}</Typography>
                         <Actors />
                     </Grid>

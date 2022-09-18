@@ -37,12 +37,14 @@ const PurchaseTicket: FunctionComponent<{ ticketTypes: TicketProps[], isMobile: 
                 {!ismobile &&
                     <Grid item md={5}>
                         <Typography variant="h5" sx={{ fontSize: "1.8rem" }}>{_('descTitle')}</Typography>
-                        <Typography variant="h5" sx={{ textAlign: "justify", fontWeight: 400, marginTop: "1.5rem" }}>{_(`methods.${paymentMethod.name}.desc`)}</Typography>
+                        <Typography variant="h5" sx={{ textAlign: "justify", fontWeight: 400, marginTop: "1.5rem" }}>
+                            {_(`methods.${paymentMethod.name}.desc`)}
+                        </Typography>
                     </Grid>
                 }
                 <Grid item md={5}>
                     <Typography variant="h5" sx={{ textAlign: { xs: "center", md: "left" }, fontSize: "1.8rem" }}>{_('ticketsTitle')}</Typography>
-                    <TicketTypes ticketTypes={props.ticketTypes} isMoblie={ismobile} setTicketInfo={setTicketInfo} />
+                    <TicketTypes ticketTypes={props.ticketTypes} isMoblie={ismobile} setTicketInfo={setTicketInfo} ticketInfo={ticketInfo} />
                     <Typography variant="h5" sx={{ textAlign: { xs: "center", md: "left" }, fontSize: "1.8rem", marginBottom: "2rem" }}>{_('paymentTitle')}</Typography>
                     <FormPayment isMobile={ismobile} paymentMethod={paymentMethod} ticketInfo={ticketInfo} setPaymentMethod={setPaymentMethod} />
                 </Grid>

@@ -1,4 +1,4 @@
-import { Button, Grid, Typography, styled, useTheme, TextField } from "@mui/material";
+import { Button, Grid, Typography, styled, useTheme, TextField, CircularProgress } from "@mui/material";
 import type { PaletteColor } from "@mui/material";
 import type { Dispatch, FunctionComponent, SetStateAction } from "react";
 import type { PaymentProps } from "../../shared/types/PaymentProps";
@@ -25,6 +25,7 @@ const FormPayment: FunctionComponent<{
     const theme = useTheme();
     const paymentMethod = props.paymentMethod;
     const ticketInfo = props.ticketInfo;
+
     const CustomButton = styled(Button)(() => ({
         backgroundColor: (theme.palette[ticketInfo.color] as PaletteColor).main,
         margin: "3rem 0",
@@ -38,29 +39,31 @@ const FormPayment: FunctionComponent<{
         initialValues: {
             fullName: '',
             email: '',
-            quantity: ''
+            quantity: 1
         },
         validationSchema: Yup.object({
             fullName: Yup.string().required(),
             email: Yup.string().email().required(),
             quantity: Yup.number().min(1, "Greater Than 0")
         }),
-        onSubmit: values => {
+        onSubmit: (values) => {
             const updatableValues = {
                 fullName: values.fullName,
                 email: values.email,
-                quantity: ((paymentMethod.name == "XARB" || !values.quantity) ? 1 : values.quantity),
+                quantity: values.quantity,
                 paymentMethod: paymentMethod.name,
                 productId: 15
             }
-            payment(updatableValues).then(res => window.location.href = res.data.paymentLink)
+            payment(updatableValues).then(res => {
+                window.location.href = res.data.paymentLink;
+            })
         }
     })
 
     return (
         <form onSubmit={formik.handleSubmit}>
             <Grid container>
-                <Grid item md={8}>
+                <Grid item md={8} xs={12}>
                     <PaymentMethods setPaymentMethod={props.setPaymentMethod} paymentMethod={paymentMethod} ticketInfo={ticketInfo} />
                 </Grid >
                 {!props.isMobile ?
@@ -69,7 +72,7 @@ const FormPayment: FunctionComponent<{
                             <CustomTextField variant="outlined" type="number" name="quantity" id="quantity" fullWidth
                                 disabled={paymentMethod.disable}
                                 sx={paymentMethod.disable ? { backgroundColor: "#F0F0F0" } : {}}
-                                value={formik.values.quantity}
+                                value={paymentMethod.disable ? '' : formik.values.quantity}
                                 onBlur={formik.handleBlur} onChange={formik.handleChange}
                                 helperText={formik.touched.quantity && formik.errors.quantity}
                                 error={Boolean(formik.touched.quantity && formik.errors.quantity)}
@@ -78,7 +81,9 @@ const FormPayment: FunctionComponent<{
                     </Grid>
                     :
                     <Grid item xs={8}>
-                        <Typography variant="h5" sx={{ textAlign: "justify", fontWeight: 400, marginTop: "1.5rem" }}>{paymentMethod.description}</Typography>
+                        <Typography variant="h5" sx={{ textAlign: "center", fontWeight: 400, marginTop: "1.5rem" }}>
+                            {paymentMethod.description}
+                        </Typography>
                     </Grid>
                 }
                 <Grid item xs={12}>
@@ -122,7 +127,9 @@ const FormPayment: FunctionComponent<{
                         )}
                     </>)}
                     <Grid item xs={12} md={paymentMethod.disable ? 12 : 6}>
-                        <CustomButton type="submit">{_('buy')}</CustomButton>
+                        <CustomButton type="submit" disabled={formik.isSubmitting}>
+                            {formik.isSubmitting ? <CircularProgress size={25} sx={{ color: "white" }} /> : _('buy')}
+                        </CustomButton>
                     </Grid>
                 </Grid>
             </Grid>
