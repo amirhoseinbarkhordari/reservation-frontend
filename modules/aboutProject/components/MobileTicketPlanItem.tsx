@@ -1,8 +1,8 @@
 import {FunctionComponent} from "react";
-import BronzTicket from "../../shared/components/icons/BronzTicket";
 import {Grid, styled, Typography} from "@mui/material";
 import {TicketProps} from "../../shared/types/TicketProps";
 import IconsArray from "./IconsArray";
+import BronzeTicket from "../../shared/components/icons/ticketIcons/BronzeTicket";
 
 const FlexedDiv = styled("div")({
     display: "flex",
@@ -11,8 +11,9 @@ const FlexedDiv = styled("div")({
 });
 
 const MobileTicketPlanItem: FunctionComponent<{ ticket: TicketProps }> = ({ticket}) => {
+    const Icon = ticket.svgIcon;
     return (<FlexedDiv>
-        <BronzTicket height={12} fontSize={15}/>
+        <Icon height={12} fontSize={15}/>
         <Typography marginTop={3} variant="h3">
             {ticket.typeTicket}
         </Typography>

@@ -1,7 +1,6 @@
 import type { FunctionComponent } from "react";
 import type { TicketProps } from "../../shared/types/TicketProps";
 import { Container, Grid, styled, Typography } from "@mui/material";
-import BronzTicket from "../../shared/components/icons/BronzTicket";
 import IconsArray from "./IconsArray";
 
 const TicketComponent = styled(Container)(({ theme }) => ({
@@ -34,28 +33,28 @@ const TicketInfo = styled("div")(({ theme }) => ({
     },
 }));
 
-const Ticket: FunctionComponent<{ TicketProps: TicketProps }> = (props) => {
-    const { typeTicket, descriptionTicket, price, iconList } = props.TicketProps;
-
+const Ticket: FunctionComponent<{ ticket: TicketProps }> = (props) => {
+    const { typeTicket, descriptionTicket, price, iconList } = props.ticket;
+    const Icon = props.ticket.svgIcon;
     return (
         <TicketComponent maxWidth="md">
-            <BronzTicket fontSize={10} />
+            <Icon fontSize={10} />
             <TicketInfo >
                 <Typography variant="h3" sx={{ fontWeight: 700 }} gutterBottom>{typeTicket}</Typography>
                 <CustomTypography variant="h6" >{descriptionTicket}</CustomTypography>
             </TicketInfo>
             <div style={{ width: "50%" }}>
                 <Typography variant="h5">Price:<span style={{ fontWeight: 800 }}> {price} IRR</span></Typography>
-                <Grid container rowSpacing={0} columnSpacing={2} sx={{marginTop: "0.8rem"}}>
+                <Grid container rowSpacing={0} columnSpacing={2} sx={{ marginTop: "0.8rem" }}>
                     {IconsArray.slice(0, 5).map((item) => (<Grid item key={item.slug} xs>
-                        <item.icon fontSize={2} color={(iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"}/>
+                        <item.icon fontSize={2} color={(iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"} />
                     </Grid>))}
                 </Grid>
                 <Grid container rowSpacing={0} columnSpacing={2}>
                     {IconsArray.slice(5, 10).map((item) => (<Grid item key={item.slug} xs>
-                            <item.icon fontSize={2}
-                                       color={(iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"}/>
-                        </Grid>
+                        <item.icon fontSize={2}
+                            color={(iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"} />
+                    </Grid>
                     ))}
                 </Grid>
             </div>

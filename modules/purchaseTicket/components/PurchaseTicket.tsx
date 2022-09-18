@@ -1,16 +1,16 @@
-import { Button, Container, Grid, styled, Typography, useMediaQuery, useTheme } from "@mui/material";
-import { Theme } from "@mui/material";
-import { FunctionComponent, useState } from "react";
-import TicketCafeIcon from "../../shared/components/icons/BronzTicket";
+import { Container, Grid, styled, Typography, } from "@mui/material";
+import type { FunctionComponent } from "react";
+import { useState } from "react";
+import type { PaymentProps } from "../../shared/types/PaymentProps";
 import type { TicketProps } from "../../shared/types/TicketProps";
-import PaymentMethod from "./PaymentMethod";
-import ShaparakPayment from "./ShaparakPayment";
-import XarbPayment from "./XarbPayment";
+import { PaymentMethodList } from "./PaymentMethodList";
+import TicketTypes from "./TicketTypes";
+import FormPayment from "./FormPayment";
 
 const PurchaseContainer = styled(Container)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.light,
     borderRadius: "4.2rem 4.2rem 0 0",
-    marginTop: "4.8rem"
+    marginTop: "4.8rem",
 }));
 
 const CustomTypography = styled(Typography)(({ theme }) => ({
@@ -23,44 +23,28 @@ const CustomTypography = styled(Typography)(({ theme }) => ({
     },
 }));
 
-const TicketContainer = styled("div")(({ theme }) => ({
-    margin: "3rem 0 4rem 0",
-    display: "flex",
-    [theme.breakpoints.up("sm")]: {
-        width: "70%",
-    },
-    width: "100%",
-    justifyContent: "space-between"
-}));
-
 const PurchaseTicket: FunctionComponent<{ ticketTypes: TicketProps[], isMobile: boolean }> = (props) => {
-
-    const ticketTypes = props.ticketTypes;
-    const [ticketInfo, setTicketInfo] = useState<TicketProps>(ticketTypes[0]);
-    const [paymentMethod, setPaymentMethod] = useState<string>("Xarb");
+    const ismobile = props.isMobile;
+    const [ticketInfo, setTicketInfo] = useState<TicketProps>(props.ticketTypes[0]);
+    const [paymentMethod, setPaymentMethod] = useState<PaymentProps>(PaymentMethodList[0]);
 
     return (
         <PurchaseContainer>
             <CustomTypography variant="h3">Purchase the Ticket</CustomTypography>
-            <Typography variant="h5" sx={{ fontSize: "1.8rem" }}>Tickets</Typography>
-            <TicketContainer>
-                {ticketTypes.map((item) => {
-                    return (
-                        <div key={item.id} style={{ cursor: 'pointer' }} onClick={() => setTicketInfo(item)}>
-                            <TicketCafeIcon fontSize={props.isMobile ? 7 : 20} />
-                        </div>
-                    )
-                })
+            <Grid container sx={{ gap: "10rem" }}>
+                {!ismobile &&
+                    <Grid item md={5}>
+                        <Typography variant="h5" sx={{ fontSize: "1.8rem" }}>Description</Typography>
+                        <Typography variant="h5" sx={{ textAlign: "justify", fontWeight: 400, marginTop: "1.5rem" }}>{paymentMethod.description}</Typography>
+                    </Grid>
                 }
-            </TicketContainer>
-            <Typography variant="h5" sx={{ fontSize: "1.8rem" }}>Payment Methods</Typography>
-            <PaymentMethod ticketInfo={ticketInfo} setPaymentMethod={setPaymentMethod} paymentMethod={paymentMethod} />
-            {!!paymentMethod && (paymentMethod == "Shaparak") ?
-                <ShaparakPayment ticketInfo={ticketInfo} isMobile={props.isMobile} />
-                :
-                <XarbPayment ticketInfo={ticketInfo} />
-            }
-
+                <Grid item md={5}>
+                    <Typography variant="h5" sx={{ textAlign: { xs: "center", md: "left" }, fontSize: "1.8rem" }}>Tickets</Typography>
+                    <TicketTypes ticketTypes={props.ticketTypes} isMoblie={ismobile} setTicketInfo={setTicketInfo} />
+                    <Typography variant="h5" sx={{ textAlign: { xs: "center", md: "left" }, fontSize: "1.8rem", marginBottom: "2rem" }}>Payment Methods</Typography>
+                    <FormPayment isMobile={ismobile} paymentMethod={paymentMethod} ticketInfo={ticketInfo} setPaymentMethod={setPaymentMethod} />
+                </Grid>
+            </Grid >
         </PurchaseContainer >
     )
 }
