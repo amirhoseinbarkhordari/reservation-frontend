@@ -55,21 +55,21 @@ const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = (props
                     <Grid item xs={9} md={3} textAlign="left">
                         <LabeledCustomTextField id="walletAddress" label="Wallet Address (optional)">
                             <TextField name="walletAddress" id="walletAddress" fullWidth
-                                       sx={{ backgroundColor: "#fff", borderRadius: "1.2rem" }}
-                                       value={formik.values.walletAddress}
-                                       onBlur={formik.handleBlur} onChange={formik.handleChange}
-                                       helperText={formik.touched.walletAddress && formik.errors.walletAddress}
-                                       error={Boolean(formik.touched.walletAddress && formik.errors.walletAddress)}
-                                       InputProps={{
-                                           endAdornment: (
-                                               <InputAdornment position="end">
-                                                   {formik.values.walletAddress && (!formik.errors.walletAddress ?
-                                                       <CheckCircleIcon color='success' sx={{ fontSize: "25px" }} /> :
-                                                       <CancelRoundedIcon color='error' sx={{ fontSize: "25px" }} />)
-                                                   }
-                                               </InputAdornment>
-                                           )
-                                       }}
+                                sx={{ backgroundColor: "#fff", borderRadius: "1.2rem" }}
+                                value={formik.values.walletAddress}
+                                onBlur={formik.handleBlur} onChange={formik.handleChange}
+                                helperText={formik.touched.walletAddress && formik.errors.walletAddress}
+                                error={Boolean(formik.touched.walletAddress && formik.errors.walletAddress)}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            {formik.values.walletAddress && (!formik.errors.walletAddress ?
+                                                <CheckCircleIcon color='success' sx={{ fontSize: "25px" }} /> :
+                                                <CancelRoundedIcon color='error' sx={{ fontSize: "25px" }} />)
+                                            }
+                                        </InputAdornment>
+                                    )
+                                }}
                             />
                         </LabeledCustomTextField>
                         <Typography sx={{ textAlign: "center" }}>
