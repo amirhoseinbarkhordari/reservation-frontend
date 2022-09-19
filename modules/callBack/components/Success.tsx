@@ -26,6 +26,9 @@ const CustomButton = styled(Button)(({ theme }) => ({
         background: theme.palette.login.main,
     },
     fontSize: "1rem",
+    "@media print": {
+        display: "none"
+    }
 }));
 
 const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps, qrCode: string }> = (props) => {
