@@ -1,6 +1,7 @@
+import type { RequestPayment } from '../../shared/types/RequestPayment';
 import { ApolloClient, gql, InMemoryCache } from '@apollo/client';
 
-async function payment(data) {
+async function payment(data: RequestPayment) {
 
   const apolloClient = new ApolloClient({
     uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,

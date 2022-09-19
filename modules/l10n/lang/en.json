@@ -78,5 +78,19 @@
       "totalPriceLabel": "Total Price",
       "buy": "Buy"
     }
+  },
+  "success":{
+    "title":"Successful Purchase!",
+    "helperText":"how to make one?",
+    "submit":"Submit",
+    "walletAddressLabel":"Wallet Address (optional)",
+    "nftText": "You can also receive the NFT of this Ticket",
+    "ticket":{
+      "download":"Download",
+      "barcodeDesc":"You should show this at the entrance door.",
+      "title":"The Gathering",
+      "type":"Type",
+      "seats":"Seats"
+    }
   }
 }

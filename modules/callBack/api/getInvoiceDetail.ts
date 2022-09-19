@@ -12,45 +12,23 @@ async function getInvoiceDetail(uuid: string) {
       query getInvoiceDetail($uuid: String) {
         invoiceDetails(uuid: $uuid) {
           data {
-            email
-            fullName
             uuid
             quantity
-            paymentMethod
             walletAddress
-            transactionId
-            amountDollar
-            amountRial
             productId
             product {
               id
-              title
               uuid
               parentId
-              priceRial
-              priceDollar
-              availableQuantity
               displayStyle
-              link
-              isPurchasable
-              status
             }
             productParents {
               id
-              title
               uuid
               parentId
-              priceRial
-              priceDollar
-              availableQuantity
               displayStyle
-              link
-              isPurchasable
-              status
             }
             updatedAt
-            paymentLink
-            status
           }
           statusCode
           message

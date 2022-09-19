@@ -1,17 +1,31 @@
 import type { FunctionComponent } from "react";
-import { Grid, PaletteColor, styled, Typography, useTheme } from "@mui/material";
+import { Button, Grid, PaletteColor, styled, Typography, useTheme } from "@mui/material";
 import { InvoiceDetailProps } from "../../shared/types/InvoiceDetailProps";
 import { TicketTypes } from "../../shared/components/TicketTypes";
 import Image from "next/image";
-import QrCode from "../../../__MOCK__/images/qr-code.png";
+import { useTranslations } from "next-intl";
+import DownloadIcon from '@mui/icons-material/Download';
 
 const ImageContainer = styled('div')({
-    padding: "5% 20%",
+    padding: "5% 15%",
     position: "relative",
-    "& > span": {
+});
 
-    }
-})
+const DownloadButton = styled(Button)(({ theme }) => ({
+    color: "black",
+    fontSize: "1.2rem",
+    margin: "-2rem",
+    width: "50%",
+    height: "17%",
+    border: "3px solid #000000",
+    borderRadius: "40px",
+    float: "left",
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backdropFilter: "blur(37px)",
+    [theme.breakpoints.down("md")]: {
+        margin: "-1rem"
+    },
+}));
 
 const CustomDiv = styled("div")(({ theme }) => ({
     position: "relative",
@@ -53,8 +67,12 @@ const CustomDiv = styled("div")(({ theme }) => ({
     },
 }));
 
-const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = (props) => {
+const handleClicked = () => {
+}
+
+const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps, qrCode: string }> = (props) => {
     const invoiceDetail = props.invoiceDetail;
+    const _ = useTranslations("success.ticket");
     const typeTicket = invoiceDetail.data.productParents.find((item) => (!!item.displayStyle))?.displayStyle;
     const ticketInfo = TicketTypes.find((item) => (item.typeTicket.toLowerCase() == typeTicket?.toLowerCase()));
     const updatedTime = invoiceDetail.data.updatedAt?.split(/^([\d-]+)\w{1}([\d:]+).*$/)
@@ -71,35 +89,36 @@ const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = 
             <Grid item xs={5}>
                 <CustomDiv>
                     <ImageContainer>
-                        <Image src={QrCode.src} width={160} height={160}/>
+                        <Image src={props.qrCode} width={160} height={160} />
                     </ImageContainer>
-                    <Typography variant="h5" fontSize={{ md: "1.5rem", xs: "0.8rem" }} margin={{ md: "0 5rem", xs: 0 }}>
-                        You should show this at the entrance door.
+                    <Typography variant="h5" fontSize={{ md: "1.4rem", xs: "0.8rem", sm: "1rem" }}>
+                        {_('barcodeDesc')}
                     </Typography>
                 </CustomDiv>
+                <DownloadButton onClick={handleClicked}>{_('download')}<DownloadIcon /></DownloadButton>
             </Grid>
             <Grid item xs={7}>
                 <div>
                     <Typography variant="h3" fontSize={{ xs: "1.5rem", md: "2rem" }} marginTop={{ md: "7rem", xs: "2.5rem" }}>
-                        The Gathering
+                        {_('title')}
                     </Typography>
                     <Typography variant="h5" fontSize="1.3rem" margin="1rem">
                         {!!updatedTime && `${updatedTime[1]} , ${updatedTime[2]}`}
                     </Typography>
                     <Grid container>
-                        <Grid item xs={4}>
+                        <Grid item xs={5}>
                             <Typography variant="h5" fontSize={{ md: "1.2rem", xs: "0.8rem" }}>
-                                Type: {typeTicket?.toLowerCase()}
+                                {_('type')} : {typeTicket?.toLowerCase()}
                             </Typography>
                         </Grid>
                         <Grid item xs={4}>
                             <Typography variant="h5" fontSize={{ md: "1.2rem", xs: "0.8rem" }}>
-                                Seats: {invoiceDetail.data.quantity}
+                                {_('seats')} : {invoiceDetail.data.quantity}
                             </Typography>
                         </Grid>
                     </Grid>
                     <Typography variant="h3" fontSize={{ xs: "1rem" }} textAlign="right" margin={{ md: "7rem 2rem 1rem 0", xs: "2rem 2rem 1rem 0" }}>
-                        no. {invoiceDetail.data.transactionId}
+                        no. {invoiceDetail.data.uuid}
                     </Typography>
                 </div>
             </Grid>
