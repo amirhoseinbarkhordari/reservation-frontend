@@ -16,22 +16,22 @@ const ImageDisplay = styled("div")(() => ({
 }));
 
 const DivWithSeparator = styled(Grid)({
-    "& > div.container": {
-        position: "relative",
-        margin: "0 10px",
-        "&:after": {
-            content: "''",
-            display: "block",
-            position: "absolute",
-            margin: "-18px 0px",
-            right: "5px",
-            top: "50%",
-            width: "1px",
-            height: "36px",
-            backgroundColor: "rgba(0, 0, 0, 0.28)"
-        }
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    "&:after": {
+        content: "''",
+        display: "block",
+        position: "absolute",
+        margin: "-18px 0px",
+        right: 0,
+        top: "50%",
+        width: "1px",
+        height: "36px",
+        backgroundColor: "rgba(0, 0, 0, 0.28)"
     },
-    "&:last-child > div.container:after": {
+
+    "&:last-child:after": {
         display: "none"
     }
 });
@@ -46,7 +46,7 @@ const PaymentMethods: FunctionComponent<{
         <Grid container>
             {PaymentMethodList.map((item) => {
                 return (
-                    <DivWithSeparator item md={6} xs={6} key={item.name}>
+                    <DivWithSeparator item xs={6} sm={4} md={6} key={item.name}>
                         <div className="container">
                             <ImageDisplay style={
                                 (props.paymentMethod.name == item.name) ?
