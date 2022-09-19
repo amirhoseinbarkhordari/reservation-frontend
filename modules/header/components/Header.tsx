@@ -49,8 +49,7 @@ const CustomToggleButton = styled(ToggleButton)(() => ({
     "&.Mui-selected": {
         backgroundColor: "rgba(26, 26, 26, 0.8)",
         "& > span.container": {
-            content: "''",
-            textDecoration: "underline",
+            lineHeight: "30px",
             position: "absolute",
             backgroundColor: "white",
             borderRadius: "50%",
@@ -67,6 +66,7 @@ const Header: FunctionComponent = () => {
 
     const handleToggle = (event: React.MouseEvent<HTMLElement>, newLocale: string) => {
         setToggleButton(newLocale);
+        document.cookie = `NEXT_LOCALE=${newLocale}`;
         router.push('/', '/', { locale: newLocale })
     }
 
