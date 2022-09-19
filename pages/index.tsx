@@ -1,5 +1,5 @@
 import type { Theme } from '@mui/material';
-import type { NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import { Container, Divider, useMediaQuery } from '@mui/material';
 import AboutProject from '../modules/aboutProject/components/AboutProject';
 import Header from '../modules/header/components/Header';
@@ -23,7 +23,7 @@ const Home: NextPage = () => {
     )
 }
 
-export async function getStaticProps({ locale }) {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
     return {
         props: {
             messages: (await import(`../modules/l10n/lang/${locale}.json`)).default,
