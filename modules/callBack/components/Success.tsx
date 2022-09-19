@@ -28,7 +28,7 @@ const CustomButton = styled(Button)(({ theme }) => ({
     fontSize: "1rem",
 }));
 
-const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = (props) => {
+const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps, qrCode: string }> = (props) => {
     const invoiceDetail = props.invoiceDetail;
     const _ = useTranslations("success");
     const [disableButton, setDisableButton] = useState<boolean>(!!invoiceDetail.data.walletAddress);
@@ -58,12 +58,14 @@ const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = (props
     return (
         <form onSubmit={formik.handleSubmit}>
             <SuccessContainer sx={{ width: { md: "90%", xs: "100%" } }}>
-                <Typography variant="h4" margin="5rem 0">Successful Purchase!</Typography>
-                <TicketInvoice invoiceDetail={invoiceDetail} />
-                <Typography variant="h4" fontSize="1.4rem" margin="2rem 0">You can also receive the NFT of this Ticket</Typography>
+                <Typography variant="h4" margin="5rem 0">{_('title')}</Typography>
+                <TicketInvoice invoiceDetail={invoiceDetail} qrCode={props.qrCode} />
+                <Typography variant="h4" fontSize="1.4rem" margin="5rem 0 0 0">
+                    {_('nftText')}
+                </Typography>
                 <Grid container spacing={1}>
                     <Grid item xs={9} md={3} textAlign="left">
-                        <LabeledCustomTextField id="walletAddress" label="Wallet Address (optional)" >
+                        <LabeledCustomTextField id="walletAddress" label={_('walletAddressLabel')} fontSize={15}>
                             <TextField name="walletAddress" id="walletAddress" fullWidth
                                 sx={{ backgroundColor: "#fff", borderRadius: "1.2rem" }}
                                 value={formik.values.walletAddress}

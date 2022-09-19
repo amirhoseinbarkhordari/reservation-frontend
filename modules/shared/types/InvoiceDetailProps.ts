@@ -4,7 +4,6 @@ export type InvoiceDetailProps = {
         uuid: string;
         quantity: number;
         walletAddress?: string
-        transactionId: string;
         productId: number;
         product: ProductProps;
         productParents: ProductProps[];

@@ -15,7 +15,6 @@ async function getInvoiceDetail(uuid: string) {
             uuid
             quantity
             walletAddress
-            transactionId
             productId
             product {
               id
