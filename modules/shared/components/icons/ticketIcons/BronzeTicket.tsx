@@ -1,9 +1,9 @@
-import type { IconProps } from "../../types/IconProps";
+import type { IconProps } from "../../../types/IconProps";
 import type { ReactElement } from "react";
 import React from "react";
 import { SvgIcon } from "@mui/material";
 
-const BronzeTicket: React.FunctionComponent<IconProps & {height?: number}> = (props): ReactElement => {
+const BronzeTicket: React.FunctionComponent<IconProps> = (props): ReactElement => {
     return (
         <SvgIcon
             htmlColor="transparent"

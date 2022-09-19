@@ -67,7 +67,8 @@ const Header: FunctionComponent = () => {
     const handleToggle = (event: React.MouseEvent<HTMLElement>, newLocale: string) => {
         setToggleButton(newLocale);
         document.cookie = `NEXT_LOCALE=${newLocale}`;
-        router.push('/', '/', { locale: newLocale })
+        const { pathname, asPath, query } = router;
+        router.push({ pathname, query }, asPath, { locale: newLocale })
     }
 
     return (
@@ -122,7 +123,8 @@ const Header: FunctionComponent = () => {
                     <Grid item xs={12} md={8} lg={8} sx={{ my: 10 }} >
                         <Typography variant="h3">{_('aboutTitle')}</Typography>
                         <Typography variant="h6" sx={{ marginTop: "0.5rem" }}>
-                            {_('aboutDesc')}                        </Typography>
+                            {_('aboutDesc')}
+                        </Typography>
                         <Typography variant="h3" marginTop="4.2rem">{_('mentorsTitle')}</Typography>
                         <Actors />
                     </Grid>

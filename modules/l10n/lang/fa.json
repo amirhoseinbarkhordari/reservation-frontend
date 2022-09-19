@@ -78,5 +78,9 @@
       "totalPriceLabel": "قیمت نهایی",
       "buy": "خرید"
     }
+  },
+  "success":{
+    "helperText":"راهنمای ساخت کیف‌ پول",
+    "submit":"ثبت"
   }
 }

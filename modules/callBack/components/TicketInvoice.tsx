@@ -71,7 +71,7 @@ const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps }> = 
             <Grid item xs={5}>
                 <CustomDiv>
                     <ImageContainer>
-                        <Image src={QrCode.src} width={160} height={160}/>
+                        <Image src={QrCode.src} width={160} height={160} />
                     </ImageContainer>
                     <Typography variant="h5" fontSize={{ md: "1.5rem", xs: "0.8rem" }} margin={{ md: "0 5rem", xs: 0 }}>
                         You should show this at the entrance door.

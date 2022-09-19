@@ -77,6 +77,10 @@
       },
       "totalPriceLabel": "Total Price",
       "buy": "Buy"
+    },
+    "success":{
+      "helperText":"how to make one?",
+      "submit":"Submit"
     }
   }
 }

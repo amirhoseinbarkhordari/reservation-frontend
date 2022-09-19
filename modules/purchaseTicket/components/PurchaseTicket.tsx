@@ -6,7 +6,7 @@ import type { TicketProps } from "../../shared/types/TicketProps";
 import { PaymentMethodList } from "./PaymentMethodList";
 import TicketTypes from "./TicketTypes";
 import FormPayment from "./FormPayment";
-import {useTranslations} from "use-intl";
+import { useTranslations } from "use-intl";
 
 const PurchaseContainer = styled(Container)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.light,

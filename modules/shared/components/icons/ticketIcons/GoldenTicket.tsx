@@ -3,7 +3,7 @@ import type { ReactElement } from "react";
 import React from "react";
 import { SvgIcon } from "@mui/material";
 
-const GoldenTicket: React.FunctionComponent<IconProps & {height?: number}> = (props): ReactElement => {
+const GoldenTicket: React.FunctionComponent<IconProps> = (props): ReactElement => {
     return (
         <SvgIcon
             htmlColor="transparent"
