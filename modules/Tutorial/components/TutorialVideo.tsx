@@ -16,7 +16,7 @@ const TutorialVideo: FunctionComponent = () => {
             <Typography variant="h5" sx={{ fontSize: "2.4rem", margin: "3rem 0" }}>
                 {_('videoTitle')}
             </Typography>
-            <Video width="100%" poster={TutorialVideoCover.src} controls allowDownload={false}>
+            <Video width="100%" poster={TutorialVideoCover.src} controls controlsList="nodownload">
                 <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"/>
                 <source src="https://www.w3schools.com/html/movie.ogg" type="video/ogg"/>
                 Your browser does not support the video tag.
