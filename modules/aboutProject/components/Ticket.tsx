@@ -56,7 +56,7 @@ const Ticket: FunctionComponent<{ ticket: MergedTicketProps }> = (props) => {
             </TicketInfo>
             <div style={{ width: "50%" }}>
                 <Typography variant="h5">{_('priceLabel')}: <span style={{ fontWeight: 800 }}>
-                    {priceSeparator(priceRial)} IRR
+                    {priceSeparator(priceRial) + " " + _("priceUnits.rial")}
                 </span></Typography>
                 <Grid container rowSpacing={0} columnSpacing={2} sx={{ marginTop: "0.8rem" }}>
                     {IconsArray.slice(0, 5).map((item) => (<Grid item key={item.slug} xs>

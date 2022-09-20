@@ -21,7 +21,7 @@ const MobileTicketPlanItem: FunctionComponent<{ ticket: MergedTicketProps }> = (
             {_(`${lowerCasedDisplayStyle}.title`)}
         </Typography>
         <Typography marginTop={1.5} variant="h5">
-            {priceSeparator(ticket.priceRial)} IRR
+            {priceSeparator(ticket.priceRial) + " " + _("priceUnits.rial")}
         </Typography>
         <Typography variant="body1" marginTop={3} textAlign="center">
             {_(`${lowerCasedDisplayStyle}.desc`)}
