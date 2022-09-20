@@ -3,6 +3,7 @@ import { Grid, styled, Typography } from "@mui/material";
 import IconsArray from "./IconsArray";
 import { useTranslations } from "use-intl";
 import type {MergedTicketProps} from "../../shared/types/TicketProps";
+import priceSeparator from "../../shared/services/priceSeparator";
 
 const FlexedDiv = styled("div")({
     display: "flex",
@@ -20,7 +21,7 @@ const MobileTicketPlanItem: FunctionComponent<{ ticket: MergedTicketProps }> = (
             {_(`${lowerCasedDisplayStyle}.title`)}
         </Typography>
         <Typography marginTop={1.5} variant="h5">
-            {ticket.priceRial} IRR
+            {priceSeparator(ticket.priceRial)} IRR
         </Typography>
         <Typography variant="body1" marginTop={3} textAlign="center">
             {_(`${lowerCasedDisplayStyle}.desc`)}

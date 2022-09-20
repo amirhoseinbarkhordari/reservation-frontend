@@ -5,6 +5,7 @@ import IconsArray from "./IconsArray";
 import {useTranslations} from "use-intl";
 import {ProductItemResponseType} from "../../purchaseTicket/types/getMainProductsResponseType";
 import {MergedTicketProps} from "../../shared/types/TicketProps";
+import priceSeparator from "../../shared/services/priceSeparator";
 
 const TicketComponent = styled(Container)(({ theme }) => ({
     display: "flex",
@@ -54,7 +55,9 @@ const Ticket: FunctionComponent<{ ticket: MergedTicketProps }> = (props) => {
                 </CustomTypography>
             </TicketInfo>
             <div style={{ width: "50%" }}>
-                <Typography variant="h5">{_('priceLabel')}: <span style={{ fontWeight: 800 }}> {priceRial} IRR</span></Typography>
+                <Typography variant="h5">{_('priceLabel')}: <span style={{ fontWeight: 800 }}>
+                    {priceSeparator(priceRial)} IRR
+                </span></Typography>
                 <Grid container rowSpacing={0} columnSpacing={2} sx={{ marginTop: "0.8rem" }}>
                     {IconsArray.slice(0, 5).map((item) => (<Grid item key={item.slug} xs>
                         <item.icon fontSize={2} color={(iconList.includes(item.slug)) ? "#000000" : "#C5C5C5"} />

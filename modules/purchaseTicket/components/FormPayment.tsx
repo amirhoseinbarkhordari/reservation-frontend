@@ -10,6 +10,7 @@ import * as Yup from 'yup';
 import PaymentMethods from "./PaymentMethods";
 import {useTranslations} from "use-intl";
 import type {RequestPayment} from "../../shared/types/RequestPayment";
+import priceSeparator from "../../shared/services/priceSeparator";
 
 const CustomTextField = styled(TextField)(() => ({
     backgroundColor: "#fff",
@@ -110,7 +111,9 @@ const FormPayment: FunctionComponent<{
                     {paymentMethod.disable || (<>
                         <Grid item xs={6}>
                             <LabeledCustomTextField id="TotalPrice" label={_('form.totalPriceLabel')}>
-                                <span style={{fontSize: "1.5rem", fontWeight: 700}}>{ticketInfo.priceRial * (formik.values.quantity && formik.values.quantity > 0 ? formik.values.quantity : 1)} IRR</span>
+                                <span style={{fontSize: "1.5rem", fontWeight: 700}}>
+                                    {priceSeparator(ticketInfo.priceRial * (formik.values.quantity && formik.values.quantity > 0 ? formik.values.quantity : 1))} IRR
+                                </span>
                             </LabeledCustomTextField>
                         </Grid>
                         {props.isMobile && (
