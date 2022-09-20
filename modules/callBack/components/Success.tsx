@@ -102,15 +102,13 @@ const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps, qrCode: st
                         </Grid>
                     </Grid>
                     :
-                    <Grid container>
-                        <Grid xs={3}><LabeledCustomTextField id="walletAddress" label={_('walletAddressLabel')} fontSize={15}>
-                            <TextField name="walletAddress" id="walletAddress" fullWidth
-                                sx={{ backgroundColor: "#fff", borderRadius: "1.2rem" }}
-                                value={formik.values.walletAddress}
-                                disabled
-                            />
-                        </LabeledCustomTextField></Grid>
-                    </Grid>
+                    <LabeledCustomTextField id="walletAddress" label={_('walletAddressLabel')} fontSize={15}>
+                        <TextField name="walletAddress" id="walletAddress" fullWidth
+                            sx={{ backgroundColor: "#fff", borderRadius: "1.2rem", margin: "1rem 0", width: "290px" }}
+                            value={formik.values.walletAddress}
+                            disabled
+                        />
+                    </LabeledCustomTextField>
                 }
             </SuccessContainer >
         </form >
