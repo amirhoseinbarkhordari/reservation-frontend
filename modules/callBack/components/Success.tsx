@@ -31,7 +31,7 @@ const CustomButton = styled(Button)(({ theme }) => ({
     }
 }));
 
-const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps, qrCode: string }> = (props) => {
+const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps, qrCode: string, local: string }> = (props) => {
     const invoiceDetail = props.invoiceDetail;
     const _ = useTranslations("success");
     const [disableButton, setDisableButton] = useState<boolean>(!!invoiceDetail.data.walletAddress);
@@ -45,16 +45,19 @@ const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps, qrCode: st
                 "Please enter your Polygon Address wallet!"
             )
         }),
-        onSubmit: (values) => {
+        onSubmit: (values, { setSubmitting }) => {
             const updatableValues: Keyable = {
                 uuid: invoiceDetail.data.uuid,
                 walletAddress: values.walletAddress,
             }
-            updateWalletAddress(updatableValues.uuid, updatableValues.walletAddress).then(res => {
+            updateWalletAddress(updatableValues.uuid, updatableValues.walletAddress, props.local).then(res => {
                 if (res.statusCode === 200) {
                     setDisableButton(true)
                 }
-            });
+            }).catch(() => {
+                setSubmitting(false);
+            }
+            )
         }
     })
 

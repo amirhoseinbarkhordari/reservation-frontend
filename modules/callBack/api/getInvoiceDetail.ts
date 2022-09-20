@@ -8,7 +8,7 @@ async function getInvoiceDetail(uuid: string, local: string) {
     uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
     cache: new InMemoryCache(),
     headers: {
-      "x-lang": local.toUpperCase() ?? "EN"
+      "x-lang": local.toUpperCase()
     }
   })
 
@@ -26,12 +26,20 @@ async function getInvoiceDetail(uuid: string, local: string) {
               uuid
               parentId
               displayStyle
+              metadata{
+                field
+                value
+              }
             }
             productParents {
               id
               uuid
               parentId
               displayStyle
+              metadata{
+                field
+                value
+              }
             }
             updatedAt
             status

@@ -19,13 +19,10 @@ export type ProductProps = {
     uuid: string;
     parentId: number;
     displayStyle?: string;
-    ProductMetadata: ProductMetadata;
+    metadata: Metadata[];
 }
 
-export type ProductMetadata = {
-    field: {
-        title: string,
-        description: string
-    };
+export type Metadata = {
+    field: string;
     value: string;
 }

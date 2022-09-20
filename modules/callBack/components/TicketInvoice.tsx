@@ -113,7 +113,7 @@ const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps, qrCo
                     <Grid container>
                         <Grid item xs={5}>
                             <Typography variant="h5" fontSize={{ md: "1.2rem", xs: "0.8rem" }}>
-                                {_('type')} : {typeTicket?.toLowerCase()}
+                                {_('type')} : {invoiceDetail.data.product.metadata.find(item => item.field == "title")?.value}
                             </Typography>
                         </Grid>
                         <Grid item xs={4}>

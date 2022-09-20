@@ -27,7 +27,7 @@ const FormPayment: FunctionComponent<{
     const paymentMethod = props.paymentMethod;
     const ticketInfo = props.ticketInfo;
 
-    const CustomButton = styled(Button)(() => ({
+    const CustomButton = styled(Button)(({ theme }) => ({
         backgroundColor: (theme.palette[ticketInfo.color] as PaletteColor).main,
         margin: "3rem 0",
         "&:hover": {
