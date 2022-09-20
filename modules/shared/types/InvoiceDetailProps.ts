@@ -16,7 +16,16 @@ export type InvoiceDetailProps = {
 
 export type ProductProps = {
     id: number;
-    uuid?: string;
+    uuid: string;
     parentId: number;
     displayStyle?: string;
+    ProductMetadata: ProductMetadata;
+}
+
+export type ProductMetadata = {
+    field: {
+        title: string,
+        description: string
+    };
+    value: string;
 }

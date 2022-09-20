@@ -76,7 +76,7 @@ const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps, qrCo
     const _ = useTranslations("success.ticket");
     const typeTicket = invoiceDetail.data.productParents.find((item) => (!!item.displayStyle))?.displayStyle;
     const ticketInfo = TicketTypes.find((item) => (item.typeTicket.toLowerCase() == typeTicket?.toLowerCase()));
-    const updatedTime = invoiceDetail.data.updatedAt?.split(/^([\d-]+)\w{1}([\d:]+).*$/)
+    const updatedTime = invoiceDetail.data.updatedAt?.split(/^([\d-]+)\w{1}([\d:]+).*$/);
     const theme = useTheme();
 
     const handleClicked = () => {
@@ -113,7 +113,7 @@ const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps, qrCo
                     <Grid container>
                         <Grid item xs={5}>
                             <Typography variant="h5" fontSize={{ md: "1.2rem", xs: "0.8rem" }}>
-                                {_('type')} : {typeTicket?.toLowerCase()}
+                                {_('type')} : {invoiceDetail.data.product.ProductMetadata.value}
                             </Typography>
                         </Grid>
                         <Grid item xs={4}>
