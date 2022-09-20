@@ -33,7 +33,7 @@ const Payment: NextPage<{ status: string, invoiceDetail: InvoiceDetailProps, qrC
     return (
         <>
             {
-                (props.status == "success") ?
+                (props.status == "success" && props.invoiceDetail.data.status == "SUCCESSFUL") ?
                     <Success invoiceDetail={props.invoiceDetail} qrCode={props.qrCode} />
                     :
                     <Failed />

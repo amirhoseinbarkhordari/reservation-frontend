@@ -29,6 +29,7 @@ async function getInvoiceDetail(uuid: string) {
               displayStyle
             }
             updatedAt
+            status
           }
           statusCode
           message

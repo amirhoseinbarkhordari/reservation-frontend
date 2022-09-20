@@ -8,6 +8,7 @@ export type InvoiceDetailProps = {
         product: ProductProps;
         productParents: ProductProps[];
         updatedAt: string;
+        status: string;
     }
     statusCode: number;
     message: string;

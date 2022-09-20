@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Container, Grid, InputAdornment, styled, TextField, Typography } from "@mui/material";
+import { Button, CircularProgress, Container, Grid, InputAdornment, OutlinedInput, styled, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import { FunctionComponent, useState } from "react";
 import LabeledCustomTextField from "../../shared/components/formElements/LabelCustomTextField";
@@ -66,40 +66,49 @@ const Success: FunctionComponent<{ invoiceDetail: InvoiceDetailProps, qrCode: st
                 <Typography variant="h4" fontSize="1.4rem" margin="5rem 0 0 0">
                     {_('nftText')}
                 </Typography>
-                <Grid container spacing={1}>
-                    <Grid item xs={9} md={3} textAlign="left">
-                        <LabeledCustomTextField id="walletAddress" label={_('walletAddressLabel')} fontSize={15}>
-                            <TextField name="walletAddress" id="walletAddress" fullWidth
-                                sx={{ backgroundColor: "#fff", borderRadius: "1.2rem" }}
-                                value={formik.values.walletAddress}
-                                onBlur={formik.handleBlur} onChange={formik.handleChange}
-                                helperText={formik.touched.walletAddress && formik.errors.walletAddress}
-                                error={Boolean(formik.touched.walletAddress && formik.errors.walletAddress)}
-                                InputProps={{
-                                    endAdornment: (
-                                        <InputAdornment position="end">
-                                            {formik.values.walletAddress && (!formik.errors.walletAddress ?
-                                                <CheckCircleIcon color='success' sx={{ fontSize: "25px" }} /> :
-                                                <CancelRoundedIcon color='error' sx={{ fontSize: "25px" }} />)
-                                            }
-                                        </InputAdornment>
-                                    )
-                                }}
-                            />
-                        </LabeledCustomTextField>
-                        <Typography sx={{ textAlign: "center" }}>
-                            <Link href="https://google.com"><a>{_('helperText')}</a></Link>
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={2} md={1}>
-                        {
-                            !disableButton &&
+                {!disableButton ?
+                    <Grid container spacing={1}>
+                        <Grid item xs={9} md={3} textAlign="left">
+                            <LabeledCustomTextField id="walletAddress" label={_('walletAddressLabel')} fontSize={15}>
+                                <TextField name="walletAddress" id="walletAddress" fullWidth
+                                    sx={{ backgroundColor: "#fff", borderRadius: "1.2rem" }}
+                                    value={formik.values.walletAddress}
+                                    onBlur={formik.handleBlur} onChange={formik.handleChange}
+                                    helperText={formik.touched.walletAddress && formik.errors.walletAddress}
+                                    error={Boolean(formik.touched.walletAddress && formik.errors.walletAddress)}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                {formik.values.walletAddress && (!formik.errors.walletAddress ?
+                                                    <CheckCircleIcon color='success' sx={{ fontSize: "25px" }} /> :
+                                                    <CancelRoundedIcon color='error' sx={{ fontSize: "25px" }} />)
+                                                }
+                                            </InputAdornment>
+                                        )
+                                    }}
+                                />
+                            </LabeledCustomTextField>
+                            <Typography sx={{ textAlign: "center" }}>
+                                <Link href="https://google.com"><a>{_('helperText')}</a></Link>
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={2} md={1}>
                             <CustomButton type="submit" disabled={!formik.values.walletAddress || formik.isSubmitting}>
                                 {formik.isSubmitting ? <CircularProgress sx={{ color: "white" }} size={25} /> : _('submit')}
                             </CustomButton>
-                        }
+                        </Grid>
                     </Grid>
-                </Grid>
+                    :
+                    <Grid container>
+                        <Grid xs={3}><LabeledCustomTextField id="walletAddress" label={_('walletAddressLabel')} fontSize={15}>
+                            <TextField name="walletAddress" id="walletAddress" fullWidth
+                                sx={{ backgroundColor: "#fff", borderRadius: "1.2rem" }}
+                                value={formik.values.walletAddress}
+                                disabled
+                            />
+                        </LabeledCustomTextField></Grid>
+                    </Grid>
+                }
             </SuccessContainer >
         </form >
     )
