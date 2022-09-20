@@ -1,4 +1,4 @@
-import type { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import { Button, Grid, PaletteColor, styled, Typography, useTheme } from "@mui/material";
 import { InvoiceDetailProps } from "../../shared/types/InvoiceDetailProps";
 import { TicketTypes } from "../../shared/components/TicketTypes";
@@ -12,8 +12,8 @@ const ImageContainer = styled('div')({
 });
 
 const DownloadButton = styled(Button)(({ theme }) => ({
-    color: "black",
     fontSize: "1.2rem",
+    color: "black",
     margin: "-2rem",
     width: "50%",
     height: "17%",
@@ -23,8 +23,12 @@ const DownloadButton = styled(Button)(({ theme }) => ({
     backgroundColor: "rgba(255, 255, 255, 0.1)",
     backdropFilter: "blur(37px)",
     [theme.breakpoints.down("md")]: {
-        margin: "-1rem"
+        margin: "-1rem",
+        fontSize: "0.6rem",
     },
+    "@media print": {
+        display: "none"
+    }
 }));
 
 const CustomDiv = styled("div")(({ theme }) => ({
@@ -67,9 +71,6 @@ const CustomDiv = styled("div")(({ theme }) => ({
     },
 }));
 
-const handleClicked = () => {
-}
-
 const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps, qrCode: string }> = (props) => {
     const invoiceDetail = props.invoiceDetail;
     const _ = useTranslations("success.ticket");
@@ -77,6 +78,10 @@ const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps, qrCo
     const ticketInfo = TicketTypes.find((item) => (item.typeTicket.toLowerCase() == typeTicket?.toLowerCase()));
     const updatedTime = invoiceDetail.data.updatedAt?.split(/^([\d-]+)\w{1}([\d:]+).*$/)
     const theme = useTheme();
+
+    const handleClicked = () => {
+        window.print();
+    }
 
     return (
         <Grid container sx={{
@@ -95,7 +100,7 @@ const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps, qrCo
                         {_('barcodeDesc')}
                     </Typography>
                 </CustomDiv>
-                <DownloadButton onClick={handleClicked}>{_('download')}<DownloadIcon /></DownloadButton>
+                <DownloadButton onClick={handleClicked}>{_('download')}<DownloadIcon sx={{ fontSize: "15px" }} /></DownloadButton>
             </Grid>
             <Grid item xs={7}>
                 <div>
@@ -117,8 +122,13 @@ const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps, qrCo
                             </Typography>
                         </Grid>
                     </Grid>
-                    <Typography variant="h3" fontSize={{ xs: "1rem" }} textAlign="right" margin={{ md: "7rem 2rem 1rem 0", xs: "2rem 2rem 1rem 0" }}>
-                        no. {invoiceDetail.data.uuid}
+                    <Typography
+                        variant="h3"
+                        fontSize={{ xs: "1rem" }}
+                        textAlign="right"
+                        margin={{ md: "7rem 1rem 1rem 1rem", xs: "2rem 1rem 1rem 1rem" }}
+                        noWrap>
+                        no.{invoiceDetail.data.uuid}
                     </Typography>
                 </div>
             </Grid>
