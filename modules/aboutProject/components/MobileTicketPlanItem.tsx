@@ -1,8 +1,8 @@
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { Grid, styled, Typography } from "@mui/material";
-import { TicketProps } from "../../shared/types/TicketProps";
 import IconsArray from "./IconsArray";
 import { useTranslations } from "use-intl";
+import type {MergedTicketProps} from "../../shared/types/TicketProps";
 
 const FlexedDiv = styled("div")({
     display: "flex",
@@ -10,19 +10,20 @@ const FlexedDiv = styled("div")({
     alignItems: "center"
 });
 
-const MobileTicketPlanItem: FunctionComponent<{ ticket: TicketProps }> = ({ ticket }) => {
+const MobileTicketPlanItem: FunctionComponent<{ ticket: MergedTicketProps }> = ({ ticket }) => {
     const Icon = ticket.svgIcon;
     const _ = useTranslations('about.tickets')
+    const lowerCasedDisplayStyle = ticket.displayStyle.toLowerCase();
     return (<FlexedDiv>
         <Icon height={12} fontSize={15} />
         <Typography marginTop={3} variant="h3">
-            {_(`${ticket.typeTicket}.title`)}
+            {_(`${lowerCasedDisplayStyle}.title`)}
         </Typography>
         <Typography marginTop={1.5} variant="h5">
-            {ticket.price}
+            {ticket.priceRial} IRR
         </Typography>
         <Typography variant="body1" marginTop={3} textAlign="center">
-            {_(`${ticket.typeTicket}.desc`)}
+            {_(`${lowerCasedDisplayStyle}.desc`)}
         </Typography>
         <div>
             <Grid container rowSpacing={0} columnSpacing={2} sx={{ marginTop: "0.8rem" }}>

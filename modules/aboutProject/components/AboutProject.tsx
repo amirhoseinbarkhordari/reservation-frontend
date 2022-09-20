@@ -5,6 +5,8 @@ import Ticket from "./Ticket";
 import IconList from "./IconList";
 import MobileTicketPlanList from "./MobileTicketPlanList";
 import {useTranslations} from "use-intl";
+import type {ProductItemResponseType} from "../../purchaseTicket/types/getMainProductsResponseType";
+import {MergedTicketProps} from "../../shared/types/TicketProps";
 
 const CustomTypography = styled(Typography)(() => ({
     fontWeight: 400,
@@ -13,7 +15,7 @@ const CustomTypography = styled(Typography)(() => ({
     textAlign: "center",
 }));
 
-const AboutProject: FunctionComponent<{ ticketTypes: TicketProps[], isMobile: boolean }> = (props) => {
+const AboutProject: FunctionComponent<{ ticketTypes: Array<MergedTicketProps>, isMobile: boolean }> = (props) => {
     const ticketTypes = props.ticketTypes;
     const _ = useTranslations("about")
     return (
