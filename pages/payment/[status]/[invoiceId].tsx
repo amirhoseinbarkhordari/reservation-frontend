@@ -8,7 +8,7 @@ import QRCode from "qrcode";
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const { status, invoiceId } = context.query;
     try {
-        const invoiceDetail = await getInvoiceDetail(invoiceId as string);
+        const invoiceDetail = await getInvoiceDetail(invoiceId as string, context.locale as string);
         const qrCode = await QRCode.toDataURL(JSON.stringify({ uuid: invoiceDetail.data.uuid }))
         return {
             props: {
@@ -20,6 +20,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         }
     }
     catch (err) {
+        console.log(err)
         return {
             redirect: {
                 permanent: false,
