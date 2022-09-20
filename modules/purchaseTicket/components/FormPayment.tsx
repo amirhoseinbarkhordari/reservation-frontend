@@ -51,7 +51,7 @@ const FormPayment: FunctionComponent<{
             const updatableValues: RequestPayment = {
                 fullName: values.fullName,
                 email: values.email,
-                quantity: values.quantity,
+                quantity: !!values.quantity ? values.quantity : 1,
                 paymentMethod: paymentMethod.name,
                 productId: 15
             }
