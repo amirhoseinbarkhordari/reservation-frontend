@@ -1,10 +1,15 @@
 import { ApolloClient, gql, InMemoryCache } from '@apollo/client';
+import { PropaneSharp } from '@mui/icons-material';
+import { getCookie } from '../../shared/components/GetCookie';
 
-async function getInvoiceDetail(uuid: string) {
+async function getInvoiceDetail(uuid: string, local: string) {
 
   const apolloClient = new ApolloClient({
     uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
     cache: new InMemoryCache(),
+    headers: {
+      "x-lang": local.toUpperCase()
+    }
   })
 
   const res = await apolloClient.query({
@@ -21,14 +26,23 @@ async function getInvoiceDetail(uuid: string) {
               uuid
               parentId
               displayStyle
+              metadata{
+                field
+                value
+              }
             }
             productParents {
               id
               uuid
               parentId
               displayStyle
+              metadata{
+                field
+                value
+              }
             }
             updatedAt
+            status
           }
           statusCode
           message
