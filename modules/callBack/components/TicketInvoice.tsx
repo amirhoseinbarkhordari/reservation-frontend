@@ -75,8 +75,8 @@ const TicketInvoice: FunctionComponent<{ invoiceDetail: InvoiceDetailProps, qrCo
     const invoiceDetail = props.invoiceDetail;
     const _ = useTranslations("success.ticket");
     const typeTicket = invoiceDetail.data.productParents.find((item) => (!!item.displayStyle))?.displayStyle;
-    const ticketInfo = TicketTypes.find((item) => (item.typeTicket.toLowerCase() == typeTicket?.toLowerCase()));
-    const updatedTime = invoiceDetail.data.updatedAt?.split(/^([\d-]+)\w{1}([\d:]+).*$/);
+    const ticketInfo = TicketTypes.find((item) => (item.displayStyle === typeTicket));
+    const updatedTime = invoiceDetail.data.updatedAt?.split(/^([\d-]+)\w([\d:]+).*$/);
     const theme = useTheme();
 
     const handleClicked = () => {

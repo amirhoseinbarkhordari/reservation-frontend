@@ -1,4 +1,5 @@
 import {Button, Grid, Typography, styled, TextField, CircularProgress} from "@mui/material";
+import type {Palette} from "@mui/material";
 import type {PaletteColor} from "@mui/material";
 import type {Dispatch, FunctionComponent, SetStateAction} from "react";
 import type {PaymentProps} from "../../shared/types/PaymentProps";
@@ -17,7 +18,7 @@ const CustomTextField = styled(TextField)(() => ({
     borderRadius: 15,
 }));
 
-const CustomButton = styled(Button)<{paletteColor: string}>(({ theme, paletteColor }) => ({
+const CustomButton = styled(Button)<{paletteColor: keyof Palette}>(({ theme, paletteColor }) => ({
     backgroundColor: (theme.palette[paletteColor] as PaletteColor).main,
     margin: "3rem 0",
     "&:hover": {
@@ -111,7 +112,7 @@ const FormPayment: FunctionComponent<{
                         <Grid item xs={6}>
                             <LabeledCustomTextField id="TotalPrice" label={_('ticketPurchase.form.totalPriceLabel')}>
                                 <span style={{fontSize: "1.5rem", fontWeight: 700}}>
-                                    {priceSeparator(ticketInfo.priceRial * (formik.values.quantity && formik.values.quantity > 0 ? formik.values.quantity : 1))}
+                                    {priceSeparator(parseFloat(ticketInfo.priceRial) * (formik.values.quantity && formik.values.quantity > 0 ? formik.values.quantity : 1))}
                                     {" " + _("about.tickets.priceUnits.rial")}
                                 </span>
                             </LabeledCustomTextField>

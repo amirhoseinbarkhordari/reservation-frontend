@@ -17,11 +17,12 @@ import type {Languages} from "../modules/shared/types/Languages";
 
 const Home: NextPage<{products: GetMainProductsResponseType, messages: Keyable}> = (props) => {
     const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
-    const finalTicketTypes: Array<ProductItemResponseType & TicketProps> = TicketTypes.map(item => {
-        const foundProduct: ProductItemResponseType = props.products.data.find(product => product.displayStyle === item.displayStyle);
-        if(!foundProduct) return;
-        return {...foundProduct, ...item}
-    }).filter(item => !!item);
+    const finalTicketTypes: Array<ProductItemResponseType & TicketProps> = [];
+    for(const item of TicketTypes) {
+        const foundProduct: ProductItemResponseType | undefined = props.products.data.find(product => product.displayStyle === item.displayStyle);
+        if(!foundProduct) continue;
+        finalTicketTypes.push({...foundProduct, ...item});
+    }
     return (
         <>
             <Header />
@@ -30,22 +31,18 @@ const Home: NextPage<{products: GetMainProductsResponseType, messages: Keyable}>
                 <AboutProject ticketTypes={finalTicketTypes} isMobile={isMobile} />
                 <Divider sx={{ width: "100%" }} />
                 <TutorialVideo />
-                <PurchaseTicket ticketTypes={finalTicketTypes} products={props.products} isMobile={isMobile} />
+                <PurchaseTicket ticketTypes={finalTicketTypes} isMobile={isMobile} />
             </Container>
         </>
     )
 }
 
 export const getServerSideProps: GetStaticProps = async ({ locale }) => {
-    try {
-        const products = await getProducts(!!locale ? locale as Languages : "EN");
-        const messages = (await import(`../modules/l10n/lang/${locale}.json`)).default;
-        return {
-            props: {products, messages}
-        };
-    } catch (err) {
-        console.error(err);
-    }
+    const products = await getProducts(!!locale ? locale as Languages : "EN");
+    const messages = (await import(`../modules/l10n/lang/${locale}.json`)).default;
+    return {
+        props: {products, messages}
+    };
 }
 
 export default Home

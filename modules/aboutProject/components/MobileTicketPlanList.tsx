@@ -1,6 +1,6 @@
 import 'swiper/css';
 import type { FunctionComponent } from "react";
-import type { TicketProps } from "../../shared/types/TicketProps";
+import type {MergedTicketProps, TicketProps} from "../../shared/types/TicketProps";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import MobileTicketPlanItem from "./MobileTicketPlanItem";
 import { styled } from "@mui/material";
@@ -32,11 +32,11 @@ const StyledContainer = styled("div")({
     }
 });
 
-const MobileTicketPlanList: FunctionComponent<{ tickets: TicketProps[] }> = ({ tickets }) => {
+const MobileTicketPlanList: FunctionComponent<{ tickets: MergedTicketProps[] }> = ({ tickets }) => {
     return (
         <StyledContainer>
             <Swiper style={{ width: "100%" }} slidesPerView={1.3} centeredSlides spaceBetween={20} loop>
-                {tickets.map(ticket => <SwiperSlide key={ticket.typeTicket}><MobileTicketPlanItem ticket={ticket} /></SwiperSlide>)}
+                {tickets.map(ticket => <SwiperSlide key={ticket.id}><MobileTicketPlanItem ticket={ticket} /></SwiperSlide>)}
             </Swiper>
         </StyledContainer>
     )
