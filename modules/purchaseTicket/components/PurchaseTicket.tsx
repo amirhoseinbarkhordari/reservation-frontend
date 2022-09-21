@@ -2,7 +2,7 @@ import { Container, Grid, styled, Typography, } from "@mui/material";
 import type { FunctionComponent } from "react";
 import { useState } from "react";
 import type { PaymentProps } from "../../shared/types/PaymentProps";
-import type { TicketProps } from "../../shared/types/TicketProps";
+import type {MergedTicketProps} from "../../shared/types/TicketProps";
 import { PaymentMethodList } from "./PaymentMethodList";
 import TicketTypes from "./TicketTypes";
 import FormPayment from "./FormPayment";
@@ -24,9 +24,9 @@ const CustomTypography = styled(Typography)(({ theme }) => ({
     },
 }));
 
-const PurchaseTicket: FunctionComponent<{ ticketTypes: TicketProps[], isMobile: boolean }> = (props) => {
+const PurchaseTicket: FunctionComponent<{ ticketTypes: MergedTicketProps[], isMobile: boolean }> = (props) => {
     const ismobile = props.isMobile;
-    const [ticketInfo, setTicketInfo] = useState<TicketProps>(props.ticketTypes[0]);
+    const [ticketInfo, setTicketInfo] = useState<MergedTicketProps>(props.ticketTypes[0]);
     const [paymentMethod, setPaymentMethod] = useState<PaymentProps>(PaymentMethodList[0]);
     const _ = useTranslations('ticketPurchase');
 
