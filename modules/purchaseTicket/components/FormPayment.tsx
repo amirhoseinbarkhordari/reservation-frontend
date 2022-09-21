@@ -1,16 +1,16 @@
-import {Button, Grid, Typography, styled, TextField, CircularProgress} from "@mui/material";
-import type {Palette} from "@mui/material";
-import type {PaletteColor} from "@mui/material";
-import type {Dispatch, FunctionComponent, SetStateAction} from "react";
-import type {PaymentProps} from "../../shared/types/PaymentProps";
+import { Button, Grid, Typography, styled, TextField, CircularProgress } from "@mui/material";
+import type { Palette } from "@mui/material";
+import type { PaletteColor } from "@mui/material";
+import type { Dispatch, FunctionComponent, SetStateAction } from "react";
+import type { PaymentProps } from "../../shared/types/PaymentProps";
 import LabeledCustomTextField from "../../shared/components/formElements/LabelCustomTextField";
-import type {MergedTicketProps} from "../../shared/types/TicketProps";
+import type { MergedTicketProps } from "../../shared/types/TicketProps";
 import payment from "../api/payment";
-import {useFormik} from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import PaymentMethods from "./PaymentMethods";
-import {useTranslations} from "use-intl";
-import type {RequestPayment} from "../../shared/types/RequestPayment";
+import { useTranslations } from "use-intl";
+import type { RequestPayment } from "../../shared/types/RequestPayment";
 import priceSeparator from "../../shared/services/priceSeparator";
 
 const CustomTextField = styled(TextField)(() => ({
@@ -18,7 +18,7 @@ const CustomTextField = styled(TextField)(() => ({
     borderRadius: 15,
 }));
 
-const CustomButton = styled(Button)<{paletteColor: keyof Palette}>(({ theme, paletteColor }) => ({
+const CustomButton = styled(Button)<{ paletteColor: keyof Palette }>(({ theme, paletteColor }) => ({
     backgroundColor: (theme.palette[paletteColor] as PaletteColor).main,
     margin: "3rem 0",
     "&:hover": {
@@ -48,7 +48,7 @@ const FormPayment: FunctionComponent<{
             email: Yup.string().email().required(),
             quantity: Yup.number().min(1, "Greater Than 0")
         }),
-        onSubmit: (values) => {
+        onSubmit: (values, { setSubmitting }) => {
             const updatableValues: RequestPayment = {
                 fullName: values.fullName,
                 email: values.email,
@@ -57,6 +57,9 @@ const FormPayment: FunctionComponent<{
                 productId: ticketInfo.id
             }
             payment(updatableValues).then(res => (window.location.href = res.data.paymentLink))
+                .catch(() => {
+                    setSubmitting(false);
+                })
         }
     })
 
@@ -65,24 +68,24 @@ const FormPayment: FunctionComponent<{
             <Grid container>
                 <Grid item md={8} xs={12}>
                     <PaymentMethods setPaymentMethod={props.setPaymentMethod} paymentMethod={paymentMethod}
-                                    ticketInfo={ticketInfo}/>
+                        ticketInfo={ticketInfo} />
                 </Grid>
                 {!props.isMobile ?
                     <Grid item md={3}>
                         <LabeledCustomTextField id="quantity" label={_('ticketPurchase.form.inputs.quantity.label')}>
                             <CustomTextField variant="outlined" type="number" name="quantity" id="quantity" fullWidth
-                                             disabled={paymentMethod.disable}
-                                             sx={paymentMethod.disable ? {backgroundColor: "#F0F0F0"} : {}}
-                                             value={paymentMethod.disable ? '' : formik.values.quantity}
-                                             onBlur={formik.handleBlur} onChange={formik.handleChange}
-                                             helperText={formik.touched.quantity && formik.errors.quantity}
-                                             error={Boolean(formik.touched.quantity && formik.errors.quantity)}
+                                disabled={paymentMethod.disable}
+                                sx={paymentMethod.disable ? { backgroundColor: "#F0F0F0" } : {}}
+                                value={paymentMethod.disable ? '' : formik.values.quantity}
+                                onBlur={formik.handleBlur} onChange={formik.handleChange}
+                                helperText={formik.touched.quantity && formik.errors.quantity}
+                                error={Boolean(formik.touched.quantity && formik.errors.quantity)}
                             />
                         </LabeledCustomTextField>
                     </Grid>
                     :
                     <Grid item xs={8}>
-                        <Typography variant="h5" sx={{textAlign: "center", fontWeight: 400, marginTop: "1.5rem"}}>
+                        <Typography variant="h5" sx={{ textAlign: "center", fontWeight: 400, marginTop: "1.5rem" }}>
                             {_(`ticketPurchase.methods.${paymentMethod.name}.desc`)}
                         </Typography>
                     </Grid>
@@ -90,28 +93,28 @@ const FormPayment: FunctionComponent<{
                 <Grid item xs={12}>
                     <LabeledCustomTextField id="fullName" label={_('ticketPurchase.form.inputs.fullName.label')}>
                         <CustomTextField variant="outlined" name="fullName" id="fullName" fullWidth
-                                         placeholder={_('ticketPurchase.form.inputs.fullName.placeHolder')}
-                                         value={formik.values.fullName}
-                                         onBlur={formik.handleBlur} onChange={formik.handleChange}
-                                         helperText={formik.touched.fullName && formik.errors.fullName}
-                                         error={Boolean(formik.touched.fullName && formik.errors.fullName)}
+                            placeholder={_('ticketPurchase.form.inputs.fullName.placeHolder')}
+                            value={formik.values.fullName}
+                            onBlur={formik.handleBlur} onChange={formik.handleChange}
+                            helperText={formik.touched.fullName && formik.errors.fullName}
+                            error={Boolean(formik.touched.fullName && formik.errors.fullName)}
                         />
                     </LabeledCustomTextField>
                     <LabeledCustomTextField id="email" label={_('ticketPurchase.form.inputs.email.label')}>
                         <CustomTextField variant="outlined" name="email" id="email" fullWidth
-                                         placeholder={_('ticketPurchase.form.inputs.email.placeHolder')}
-                                         value={formik.values.email}
-                                         onBlur={formik.handleBlur} onChange={formik.handleChange}
-                                         helperText={formik.touched.email && formik.errors.email}
-                                         error={Boolean(formik.touched.email && formik.errors.email)}
+                            placeholder={_('ticketPurchase.form.inputs.email.placeHolder')}
+                            value={formik.values.email}
+                            onBlur={formik.handleBlur} onChange={formik.handleChange}
+                            helperText={formik.touched.email && formik.errors.email}
+                            error={Boolean(formik.touched.email && formik.errors.email)}
                         />
                     </LabeledCustomTextField>
                 </Grid>
-                <Grid container sx={{alignItems: "center", justifyContent: "space-between"}}>
+                <Grid container sx={{ alignItems: "center", justifyContent: "space-between" }}>
                     {paymentMethod.disable || (<>
                         <Grid item xs={6}>
                             <LabeledCustomTextField id="TotalPrice" label={_('ticketPurchase.form.totalPriceLabel')}>
-                                <span style={{fontSize: "1.5rem", fontWeight: 700}}>
+                                <span style={{ fontSize: "1.5rem", fontWeight: 700 }}>
                                     {priceSeparator(parseFloat(ticketInfo.priceRial) * (formik.values.quantity && formik.values.quantity > 0 ? formik.values.quantity : 1))}
                                     {" " + _("about.tickets.priceUnits.rial")}
                                 </span>
@@ -121,11 +124,11 @@ const FormPayment: FunctionComponent<{
                             <Grid item xs={4}>
                                 <LabeledCustomTextField id="quantity" label={_('ticketPurchase.form.inputs.quantity.label')}>
                                     <CustomTextField variant="outlined" type="number" name="quantity" id="quantity"
-                                                     fullWidth
-                                                     value={formik.values.quantity}
-                                                     onBlur={formik.handleBlur} onChange={formik.handleChange}
-                                                     helperText={formik.touched.quantity && formik.errors.quantity}
-                                                     error={Boolean(formik.touched.quantity && formik.errors.quantity)}
+                                        fullWidth
+                                        value={formik.values.quantity}
+                                        onBlur={formik.handleBlur} onChange={formik.handleChange}
+                                        helperText={formik.touched.quantity && formik.errors.quantity}
+                                        error={Boolean(formik.touched.quantity && formik.errors.quantity)}
                                     />
                                 </LabeledCustomTextField>
                             </Grid>
@@ -133,7 +136,7 @@ const FormPayment: FunctionComponent<{
                     </>)}
                     <Grid item xs={12} md={paymentMethod.disable ? 12 : 6}>
                         <CustomButton type="submit" disabled={formik.isSubmitting} paletteColor={ticketInfo.color}>
-                            {formik.isSubmitting ? <CircularProgress size={25} sx={{color: "white"}}/> : _('ticketPurchase.form.buy')}
+                            {formik.isSubmitting ? <CircularProgress size={25} sx={{ color: "white" }} /> : _('ticketPurchase.form.buy')}
                         </CustomButton>
                     </Grid>
                 </Grid>

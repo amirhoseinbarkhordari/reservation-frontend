@@ -26,6 +26,8 @@ async function payment(data: RequestPayment) {
     `,
     variables: { data }
   })
+  if (res.data.requestPayment.statusCode >= 400)
+    throw new Error(res.data.requestPayment.message);
   return res.data.requestPayment;
 }
 

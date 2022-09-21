@@ -1,11 +1,11 @@
 import AppApolloClient from "../../shared/services/AppApolloClient";
-import {gql} from "@apollo/client";
-import type {Languages} from "../../shared/types/Languages";
+import { gql } from "@apollo/client";
+import type { Languages } from "../../shared/types/Languages";
 
 const getProducts = async (lang: Languages) => {
-    const apolloClient = AppApolloClient.getInstance(lang);
-    const res = await apolloClient.query({
-        query: gql`
+  const apolloClient = AppApolloClient.getInstance(lang);
+  const res = await apolloClient.query({
+    query: gql`
         query getMainProducts {
           getProducts(filters: {parentId: 0, isPurchasable: true}) {
             data {
@@ -22,8 +22,8 @@ const getProducts = async (lang: Languages) => {
           }
         }
         `
-    });
-    return res.data.getProducts;
+  });
+  return res.data.getProducts;
 }
 
 export default getProducts;

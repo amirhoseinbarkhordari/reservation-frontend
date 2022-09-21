@@ -11,17 +11,17 @@ import {
     GetMainProductsResponseType,
     ProductItemResponseType
 } from "../modules/purchaseTicket/types/getMainProductsResponseType";
-import type {Keyable} from "../modules/shared/types/Keyable";
-import type {TicketProps} from "../modules/shared/types/TicketProps";
-import type {Languages} from "../modules/shared/types/Languages";
+import type { Keyable } from "../modules/shared/types/Keyable";
+import type { TicketProps } from "../modules/shared/types/TicketProps";
+import type { Languages } from "../modules/shared/types/Languages";
 
-const Home: NextPage<{products: GetMainProductsResponseType, messages: Keyable}> = (props) => {
+const Home: NextPage<{ products: GetMainProductsResponseType, messages: Keyable }> = (props) => {
     const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
     const finalTicketTypes: Array<ProductItemResponseType & TicketProps> = [];
-    for(const item of TicketTypes) {
+    for (const item of TicketTypes) {
         const foundProduct: ProductItemResponseType | undefined = props.products.data.find(product => product.displayStyle === item.displayStyle);
-        if(!foundProduct) continue;
-        finalTicketTypes.push({...foundProduct, ...item});
+        if (!foundProduct) continue;
+        finalTicketTypes.push({ ...foundProduct, ...item });
     }
     return (
         <>
@@ -41,7 +41,7 @@ export const getServerSideProps: GetStaticProps = async ({ locale }) => {
     const products = await getProducts(!!locale ? locale as Languages : "EN");
     const messages = (await import(`../modules/l10n/lang/${locale}.json`)).default;
     return {
-        props: {products, messages}
+        props: { products, messages }
     };
 }
 
