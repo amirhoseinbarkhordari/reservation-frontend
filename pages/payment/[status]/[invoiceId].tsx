@@ -7,14 +7,16 @@ import QRCode from "qrcode";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const { status, invoiceId } = context.query;
+    const local = context.locale ?? context.defaultLocale;
     try {
-        const invoiceDetail = await getInvoiceDetail(invoiceId as string);
+        const invoiceDetail = await getInvoiceDetail(invoiceId as string, local as string);
         const qrCode = await QRCode.toDataURL(JSON.stringify({ uuid: invoiceDetail.data.uuid }))
         return {
             props: {
                 status,
                 invoiceDetail,
                 qrCode,
+                local,
                 messages: (await import(`../../../modules/l10n/lang/${context.locale}.json`)).default,
             }
         }
@@ -29,12 +31,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-const Payment: NextPage<{ status: string, invoiceDetail: InvoiceDetailProps, qrCode: string }> = (props) => {
+const Payment: NextPage<{ status: string, invoiceDetail: InvoiceDetailProps, qrCode: string, local: string }> = (props) => {
     return (
         <>
             {
-                (props.status == "success") ?
-                    <Success invoiceDetail={props.invoiceDetail} qrCode={props.qrCode} />
+                (props.status == "success" && props.invoiceDetail.data.status == "SUCCESSFUL") ?
+                    <Success invoiceDetail={props.invoiceDetail} qrCode={props.qrCode} local={props.local} />
                     :
                     <Failed />
             }

@@ -1,0 +1,8 @@
+version: "3.8"
+
+services:
+  reservation-frontend:
+      image: reservation-frontend:latest
+      container_name: reservation-frontend
+      ports:
+        - "9097:3000"
