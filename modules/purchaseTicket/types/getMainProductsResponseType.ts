@@ -1,3 +1,5 @@
+import {Languages} from "../../shared/types/Languages";
+
 export enum DisplayStyles {
     "GOLDEN" = "GOLDEN",
     "SILVER" = "SILVER",
@@ -6,11 +8,16 @@ export enum DisplayStyles {
 
 export interface ProductItemResponseType {
     id: number,
-    title: string,
     uuid: string,
     priceRial: string,
     priceDollar: string,
-    displayStyle: DisplayStyles
+    displayStyle: DisplayStyles,
+    metadata: Array<{
+        field: string,
+        value: string,
+        id: number,
+        language: Languages
+    }>
 }
 
 export interface GetMainProductsResponseType {

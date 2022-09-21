@@ -21,7 +21,7 @@ const TicketTypes: FunctionComponent<{
                             <Icon fontSize={8} />
                             {!props.isMoblie &&
                                 <Typography variant="h6" sx={{ margin: "1.5rem 0 0 1.5rem" }}>
-                                    {_(`${item.displayStyle.toLowerCase()}.title`)}
+                                    {item.metadata.find(item => item.field === "title")?.value ?? ""}
                                 </Typography>
                             }
                         </Grid>

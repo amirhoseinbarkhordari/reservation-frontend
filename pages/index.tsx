@@ -12,7 +12,8 @@ import {
     ProductItemResponseType
 } from "../modules/purchaseTicket/types/getMainProductsResponseType";
 import type {Keyable} from "../modules/shared/types/Keyable";
-import {TicketProps} from "../modules/shared/types/TicketProps";
+import type {TicketProps} from "../modules/shared/types/TicketProps";
+import type {Languages} from "../modules/shared/types/Languages";
 
 const Home: NextPage<{products: GetMainProductsResponseType, messages: Keyable}> = (props) => {
     const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
@@ -37,7 +38,7 @@ const Home: NextPage<{products: GetMainProductsResponseType, messages: Keyable}>
 
 export const getServerSideProps: GetStaticProps = async ({ locale }) => {
     try {
-        const products = await getProducts();
+        const products = await getProducts(!!locale ? locale as Languages : "EN");
         const messages = (await import(`../modules/l10n/lang/${locale}.json`)).default;
         return {
             props: {products, messages}

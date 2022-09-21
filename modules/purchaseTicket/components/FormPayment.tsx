@@ -1,4 +1,4 @@
-import {Button, Grid, Typography, styled, useTheme, TextField, CircularProgress} from "@mui/material";
+import {Button, Grid, Typography, styled, TextField, CircularProgress} from "@mui/material";
 import type {PaletteColor} from "@mui/material";
 import type {Dispatch, FunctionComponent, SetStateAction} from "react";
 import type {PaymentProps} from "../../shared/types/PaymentProps";
@@ -17,6 +17,15 @@ const CustomTextField = styled(TextField)(() => ({
     borderRadius: 15,
 }));
 
+const CustomButton = styled(Button)<{paletteColor: string}>(({ theme, paletteColor }) => ({
+    backgroundColor: (theme.palette[paletteColor] as PaletteColor).main,
+    margin: "3rem 0",
+    "&:hover": {
+        background: (theme.palette[paletteColor] as PaletteColor).dark
+    },
+    fontSize: "1.5rem",
+}));
+
 const FormPayment: FunctionComponent<{
     isMobile: boolean,
     paymentMethod: PaymentProps,
@@ -24,18 +33,8 @@ const FormPayment: FunctionComponent<{
     setPaymentMethod: Dispatch<SetStateAction<PaymentProps>>
 }> = (props) => {
     const _ = useTranslations();
-    const theme = useTheme();
     const paymentMethod = props.paymentMethod;
     const ticketInfo = props.ticketInfo;
-
-    const CustomButton = styled(Button)(({ theme }) => ({
-        backgroundColor: (theme.palette[ticketInfo.color] as PaletteColor).main,
-        margin: "3rem 0",
-        "&:hover": {
-            background: (theme.palette[ticketInfo.color] as PaletteColor).dark
-        },
-        fontSize: "1.5rem",
-    }));
 
     const formik = useFormik({
         initialValues: {
@@ -132,7 +131,7 @@ const FormPayment: FunctionComponent<{
                         )}
                     </>)}
                     <Grid item xs={12} md={paymentMethod.disable ? 12 : 6}>
-                        <CustomButton type="submit" disabled={formik.isSubmitting}>
+                        <CustomButton type="submit" disabled={formik.isSubmitting} paletteColor={ticketInfo.color}>
                             {formik.isSubmitting ? <CircularProgress size={25} sx={{color: "white"}}/> : _('ticketPurchase.form.buy')}
                         </CustomButton>
                     </Grid>
